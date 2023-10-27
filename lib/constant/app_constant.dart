@@ -24,7 +24,6 @@ final websiteUrl = dotenv.env['WEB_URL'];
 DioSetup dioService = DioSetup();
 
 ///global constant
-AppRouter router = AppRouter();
 AssetsConstant assetsConstant = AssetsConstant();
 ColorConstant colorConstant = ColorConstant();
 DimensionConstant dimensionConstant = DimensionConstant();

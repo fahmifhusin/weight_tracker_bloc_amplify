@@ -1,12 +1,9 @@
 library constants;
 
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
-import 'package:weight_tracker/router/app_router.dart';
 
 import '../utils/dio_setup.dart';
 import '../utils/environmentpath.dart';
