@@ -9,7 +9,12 @@ class StringConstant{
     return _stringConstant;
   }
 
+  ///splash
+  final String weightTracker = 'Weight Tracker';
+
+  ///env
   final String development = 'Development';
   final String staging = 'Staging';
   final String production = 'Production';
+
 }

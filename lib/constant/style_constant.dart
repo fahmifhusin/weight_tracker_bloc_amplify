@@ -9,4 +9,49 @@ class StyleConstant {
     return _styleConstant;
   }
 
+  TextStyle Text40Heading1({Color customColor = Colors.black,}){
+    return TextStyle(
+      fontWeight: fontwBold,
+      color: customColor,
+      fontSize: dimensionConstant.spacing40,
+    );
+  }
+
+  TextStyle Text20Heading1({Color customColor = Colors.black,}){
+    return TextStyle(
+      fontWeight: fontwBold,
+      color: customColor,
+      fontSize: dimensionConstant.spacing20,
+    );
+  }
+  TextStyle Text18Heading2({Color customColor = Colors.black}){
+    return TextStyle(
+      fontWeight: fontwBold,
+      color: customColor,
+      fontSize: dimensionConstant.spacing18,
+    );
+  }
+  TextStyle Text16Heading3({Color customColor = Colors.black}){
+    return TextStyle(
+      fontWeight: fontwSemiBold,
+      color: customColor,
+      fontSize: dimensionConstant.spacing16,
+    );
+  }
+
+  TextStyle Text14Body1({Color customColor = Colors.black}){
+    return TextStyle(
+      fontWeight: fontwRegular,
+      color: customColor,
+      fontSize: dimensionConstant.spacing14,
+    );
+  }
+
+  TextStyle Text12SmallText({Color customColor = Colors.black}){
+    return TextStyle(
+      fontWeight: fontwRegular,
+      color: customColor,
+      fontSize: dimensionConstant.spacing12,
+    );
+  }
 }

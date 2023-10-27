@@ -9,4 +9,7 @@ class AssetsConstant{
     return _assetsConstant;
   }
 
+  ///image
+  final String imageSplash = 'assets/images/ic_launcher-playstore.png';
+
 }
