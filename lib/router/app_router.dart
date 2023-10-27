@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
-import 'package:weight_tracker/app/splash/view/splash_view.dart';
+
+import '../app/module/splash/view/splash_view.dart';
 
 class AppRouter{
   static final AppRouter _appRouter = AppRouter._internal();

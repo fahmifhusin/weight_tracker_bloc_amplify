@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weight_tracker/app/app.dart';
-import 'package:weight_tracker/app/counter/view/counter_page.dart';
+import 'package:weight_tracker/app/module/counter/view/counter_page.dart';
 
 void main() {
   group('App', () {
