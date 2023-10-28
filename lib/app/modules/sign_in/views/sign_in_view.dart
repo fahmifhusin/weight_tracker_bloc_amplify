@@ -29,7 +29,7 @@ class SignInView extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Sign In to access your\nWeight Tracker & Activity',
+                  stringConstant.signInHeader,
                   textAlign: TextAlign.center,
                   style: styleConstant.Text22Heading1(
                       customHeight: 1.5,
@@ -56,21 +56,28 @@ class SignInView extends StatelessWidget {
                       child: Wrap(
                         children: [
                           Text(
-                            'Sign in',
+                            stringConstant.signIn,
                             style: styleConstant.Text22Heading1(
                                 customColor: colorConstant.splashYellow),
                           ),
-                          SizedBox(
-                            height: dimensionConstant.spacing20,
+                          customField.FieldText(
+                            title: stringConstant.emailOrPhone,
+                            teController:
+                                context.read<SignInCubit>().tecEmailOrPhone,
                           ),
-                          customField.FieldText(title: 'Email'),
-                          SizedBox(
-                            height: dimensionConstant.spacing20,
+                          customField.FieldPassword(
+                            title: stringConstant.password,
+                            teController:
+                                context.read<SignInCubit>().tecPassword,
                           ),
-                          customField.FieldPassword(title: 'Password'),
-                          generalButtons.PrimaryButton(
-                              function: () => logger.d('tap'),
-                              btnTitle: 'Sign In'),
+                          BlocBuilder<SignInCubit, SignInState>(
+                            builder: (ctx, state) =>
+                                generalButtons.PrimaryButton(
+                                    isLoading: state is SignInLoading,
+                                    function: () =>
+                                        ctx.read<SignInCubit>().doSignIn(),
+                                    btnTitle: stringConstant.signIn),
+                          ),
                           Container(
                             height: dimensionConstant.spacing20,
                             width: MediaQuery.of(context).size.width,
@@ -79,15 +86,15 @@ class SignInView extends StatelessWidget {
                             child: RichText(
                               textAlign: TextAlign.center,
                               text: TextSpan(
-                                  text: 'or\n\n',
+                                  text: '${stringConstant.or}\n\n',
                                   style: styleConstant.Text12SmallText(),
                                   children: <TextSpan>[
                                     TextSpan(
-                                      text: 'Don\'t have an account? ',
+                                      text: stringConstant.dontHaveAccount,
                                       style: styleConstant.Text12SmallText(),
                                     ),
                                     TextSpan(
-                                      text: 'Sign Up',
+                                      text: stringConstant.signUp,
                                       style: styleConstant.Text12SmallText(
                                           customColor:
                                               colorConstant.primaryBlue),

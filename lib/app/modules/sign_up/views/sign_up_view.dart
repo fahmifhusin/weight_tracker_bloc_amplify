@@ -29,7 +29,7 @@ class SignUpView extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Embark on your journey to a healthier you with our\nWeight Tracker app',
+                  stringConstant.headerSignUp,
                   textAlign: TextAlign.center,
                   style: styleConstant.Text22Heading1(
                       customHeight: 1.5,
@@ -56,37 +56,61 @@ class SignUpView extends StatelessWidget {
                       child: Wrap(
                         children: [
                           Text(
-                            'Sign Up',
+                            stringConstant.signUp,
                             style: styleConstant.Text22Heading1(
                                 customColor: colorConstant.splashYellow),
                           ),
-                          SizedBox(
-                            height: dimensionConstant.spacing20,
+                          customField.FieldText(
+                            title: stringConstant.email,
+                            teController: context.read<SignUpCubit>().tecEmail,
                           ),
-                          customField.FieldText(title: 'Email'),
-                          SizedBox(
-                            height: dimensionConstant.spacing20,
+                          customField.FieldText(
+                            title: stringConstant.phoneNumber,
+                            teController:
+                                context.read<SignUpCubit>().tecPhoneNumber,
                           ),
-                          customField.FieldPassword(title: 'Password'),
+                          customField.FieldPassword(
+                            title: stringConstant.password,
+                            teController:
+                                context.read<SignUpCubit>().tecPassword,
+                          ),
+                          customField.FieldPassword(
+                            title: stringConstant.confirmPassword,
+                            teController:
+                                context.read<SignUpCubit>().tecPasswordConfirm,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
                                 child: customField.FieldText(
-                                    title: 'Current Weight'),
+                                  title: stringConstant.currentWeight,
+                                  teController: context
+                                      .read<SignUpCubit>()
+                                      .tecCurrentWeight,
+                                ),
                               ),
                               SizedBox(
                                 width: dimensionConstant.spacing16,
                               ),
                               Expanded(
                                 child: customField.FieldText(
-                                    title: 'Weight Goals'),
+                                  title: stringConstant.weightGoals,
+                                  teController: context
+                                      .read<SignUpCubit>()
+                                      .tecWeightGoals,
+                                ),
                               ),
                             ],
                           ),
-                          generalButtons.PrimaryButton(
-                              function: () => context.read<SignUpCubit>().gotoSignInFromRegister(),
-                              btnTitle: 'Sign Up'),
+                          BlocBuilder<SignUpCubit, SignUpState>(
+                            builder: (ctx, state) =>
+                                generalButtons.PrimaryButton(
+                                    isLoading: state is SignUpLoading,
+                                    function: () =>
+                                        ctx.read<SignUpCubit>().doSignUp(),
+                                    btnTitle: stringConstant.signUp),
+                          ),
                           Container(
                             height: dimensionConstant.spacing20,
                             width: MediaQuery.of(context).size.width,
@@ -95,15 +119,15 @@ class SignUpView extends StatelessWidget {
                             child: RichText(
                               textAlign: TextAlign.center,
                               text: TextSpan(
-                                  text: 'or\n\n',
+                                  text: '${stringConstant.or}\n\n',
                                   style: styleConstant.Text12SmallText(),
                                   children: <TextSpan>[
                                     TextSpan(
-                                      text: 'Already have an account? ',
+                                      text: stringConstant.alreadyHaveAccount,
                                       style: styleConstant.Text12SmallText(),
                                     ),
                                     TextSpan(
-                                        text: 'Sign in',
+                                        text: stringConstant.signIn,
                                         style: styleConstant.Text12SmallText(
                                             customColor:
                                                 colorConstant.primaryBlue),

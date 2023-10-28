@@ -10,7 +10,9 @@ class CustomField {
   }
 
   Widget _BaseCustomField(
-      {bool isHidePassword = false, required String title}) {
+      {bool isHidePassword = false,
+      required String title,
+      required TextEditingController teController}) {
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: dimensionConstant.spacing10,
@@ -30,6 +32,7 @@ class CustomField {
           SizedBox(
             height: dimensionConstant.spacing52,
             child: TextField(
+              controller: teController,
               maxLines: 1,
               obscureText: isHidePassword,
               decoration: InputDecoration(
@@ -59,14 +62,19 @@ class CustomField {
     );
   }
 
-  Widget FieldText({required String title}) {
-    return _BaseCustomField(title: title);
-  }
-
-  Widget FieldPassword({required String title}) {
+  Widget FieldText(
+      {required String title, TextEditingController? teController}) {
     return _BaseCustomField(
       title: title,
-      isHidePassword: true,
+      teController: teController ?? TextEditingController(),
     );
+  }
+
+  Widget FieldPassword(
+      {required String title, TextEditingController? teController}) {
+    return _BaseCustomField(
+        title: title,
+        isHidePassword: true,
+        teController: teController ?? TextEditingController());
   }
 }

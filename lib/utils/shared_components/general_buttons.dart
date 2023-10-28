@@ -12,6 +12,7 @@ class GeneralButtons {
   Widget _BaseGeneralButton({
     required Function function,
     required String btnTitle,
+    bool isLoading = false,
   }) {
     return Padding(
       padding: EdgeInsets.only(
@@ -33,7 +34,15 @@ class GeneralButtons {
               dimensionConstant.spacing52,
             )),
         onPressed: () => function(),
-        child: Text(btnTitle),
+        child: isLoading
+            ? SizedBox(
+                width: dimensionConstant.spacing16,
+                height: dimensionConstant.spacing16,
+                child: CircularProgressIndicator(
+                  color: colorConstant.naturalWhite,
+                ),
+              )
+            : Text(btnTitle),
       ),
     );
   }
@@ -41,7 +50,12 @@ class GeneralButtons {
   Widget PrimaryButton({
     required Function function,
     required String btnTitle,
+    bool isLoading = false,
   }) {
-    return _BaseGeneralButton(function: function, btnTitle: btnTitle);
+    return _BaseGeneralButton(
+      function: function,
+      btnTitle: btnTitle,
+      isLoading: isLoading,
+    );
   }
 }
