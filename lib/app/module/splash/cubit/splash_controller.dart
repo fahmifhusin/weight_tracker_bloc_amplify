@@ -9,5 +9,9 @@ class SplashCubit extends Cubit<SplashState> {
     emit(SplashSuccess());
     });
   }
+
+  void gotoSignUpPageFromSplash(){
+    functionSharing.ctxRoute.go(Routes.SIGN_IN);
+  }
   
 }

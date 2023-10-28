@@ -23,5 +23,5 @@ class AppPages{
         builder: (context, state) => SignInView(),
       ),
     ],
-  ); 
+  );
 }
