@@ -19,6 +19,19 @@ class StyleConstant {
     );
   }
 
+  TextStyle Text22Heading1({
+    Color customColor = Colors.black,
+    double? customHeight,
+  }) {
+    return TextStyle(
+      fontWeight: fontwBold,
+      color: customColor,
+      fontSize: dimensionConstant.spacing22,
+      height: customHeight,
+    );
+  }
+
+
   TextStyle Text20Heading1({
     Color customColor = Colors.black,
     double? customHeight,

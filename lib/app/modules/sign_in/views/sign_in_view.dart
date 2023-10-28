@@ -31,7 +31,7 @@ class SignInView extends StatelessWidget {
                 Text(
                   'Sign In to access your\nWeight Tracker & Activity',
                   textAlign: TextAlign.center,
-                  style: styleConstant.Text20Heading1(
+                  style: styleConstant.Text22Heading1(
                       customHeight: 1.5,
                       customColor: colorConstant.naturalWhite),
                 ),
@@ -57,7 +57,7 @@ class SignInView extends StatelessWidget {
                         children: [
                           Text(
                             'Sign in',
-                            style: styleConstant.Text20Heading1(
+                            style: styleConstant.Text22Heading1(
                                 customColor: colorConstant.splashYellow),
                           ),
                           SizedBox(

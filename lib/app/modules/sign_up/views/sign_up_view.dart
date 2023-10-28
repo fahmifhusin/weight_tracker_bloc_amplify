@@ -29,9 +29,9 @@ class SignUpView extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Embark on your journey to a healthier\nyou with our Weight Tracker app',
+                  'Embark on your journey to a healthier you with our\nWeight Tracker app',
                   textAlign: TextAlign.center,
-                  style: styleConstant.Text20Heading1(
+                  style: styleConstant.Text22Heading1(
                       customHeight: 1.5,
                       customColor: colorConstant.naturalWhite),
                 ),
@@ -57,7 +57,7 @@ class SignUpView extends StatelessWidget {
                         children: [
                           Text(
                             'Sign Up',
-                            style: styleConstant.Text20Heading1(
+                            style: styleConstant.Text22Heading1(
                                 customColor: colorConstant.splashYellow),
                           ),
                           SizedBox(
@@ -68,10 +68,24 @@ class SignUpView extends StatelessWidget {
                             height: dimensionConstant.spacing20,
                           ),
                           customField.FieldPassword(title: 'Password'),
-                          customField.FieldText(title: 'Current Weight'),
-                          customField.FieldText(title: 'Weight Goals'),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: customField.FieldText(
+                                    title: 'Current Weight'),
+                              ),
+                              SizedBox(
+                                width: dimensionConstant.spacing16,
+                              ),
+                              Expanded(
+                                child: customField.FieldText(
+                                    title: 'Weight Goals'),
+                              ),
+                            ],
+                          ),
                           generalButtons.PrimaryButton(
-                              function: () => logger.d('tap'),
+                              function: () => context.read<SignUpCubit>().gotoSignInFromRegister(),
                               btnTitle: 'Sign Up'),
                           Container(
                             height: dimensionConstant.spacing20,
@@ -79,28 +93,27 @@ class SignUpView extends StatelessWidget {
                           ),
                           Center(
                             child: RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                    text: 'or\n\n',
-                                    style: styleConstant.Text12SmallText(),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text: 'Already have an account? ',
-                                        style: styleConstant.Text12SmallText(),
-                                      ),
-                                      TextSpan(
-                                          text: 'Sign in',
-                                          style: styleConstant.Text12SmallText(
-                                              customColor:
-                                                  colorConstant.primaryBlue),
-                                          recognizer: TapGestureRecognizer()
-                                            ..onTap = () => context
-                                                .read<SignUpCubit>()
-                                                .gotoSignInFromRegister())
-                                    ]),
-                              ),
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                  text: 'or\n\n',
+                                  style: styleConstant.Text12SmallText(),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: 'Already have an account? ',
+                                      style: styleConstant.Text12SmallText(),
+                                    ),
+                                    TextSpan(
+                                        text: 'Sign in',
+                                        style: styleConstant.Text12SmallText(
+                                            customColor:
+                                                colorConstant.primaryBlue),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () => context
+                                              .read<SignUpCubit>()
+                                              .gotoSignInFromRegister())
+                                  ]),
                             ),
-
+                          ),
                         ],
                       ),
                     ),
