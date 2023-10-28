@@ -29,7 +29,7 @@ class SignInView extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Sign in to access our\nWeight Tracker',
+                  'Sign In to access your\nWeight Tracker & Activity',
                   textAlign: TextAlign.center,
                   style: styleConstant.Text20Heading1(
                       customHeight: 1.5,

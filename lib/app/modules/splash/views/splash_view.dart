@@ -7,6 +7,7 @@ class SplashView extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<SplashCubit>().loadSplashScreen();
     return styleConstant.GeneralAppPage(
+      customAppBarColor: colorConstant.splashYellow,
         isDisableScroll: true,
         isEnableBack: false,
         pageColor: colorConstant.splashYellow,
