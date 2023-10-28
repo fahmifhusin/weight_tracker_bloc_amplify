@@ -8,6 +8,4 @@ class FunctionSharing {
   factory FunctionSharing() {
     return _functionSharing;
   }
-
-  BuildContext get ctxRoute => AppPages.routePages.routerDelegate.navigatorKey.currentContext!;
 }

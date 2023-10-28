@@ -17,5 +17,8 @@ class GeneralKeyAndSharedPrefs {
   final List<BlocProvider> listBlocProvider = [
     BlocProvider<SplashCubit>(create: (_)=>SplashCubit()),
     BlocProvider<SignInCubit>(create: (_)=>SignInCubit()),
+    BlocProvider<SignUpCubit>(create: (_)=>SignUpCubit()),
   ];
+
+  BuildContext get ctxRoute => AppPages.routePages.routerDelegate.navigatorKey.currentContext!;
 }

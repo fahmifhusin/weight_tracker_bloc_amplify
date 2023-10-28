@@ -7,6 +7,7 @@ import 'package:weight_tracker/app/modules/splash/splash_lib.dart';
 import 'package:weight_tracker/router/app_pages.dart';
 
 import '../../app/modules/sign_in/sign_in_lib.dart';
+import '../../app/modules/sign_up/sign_up_lib.dart';
 
 
 part 'custom_field.dart';
