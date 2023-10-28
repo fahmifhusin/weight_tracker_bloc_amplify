@@ -3,10 +3,10 @@ library shared_components;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weight_tracker/app/module/splash/splash_lib.dart';
+import 'package:weight_tracker/app/modules/splash/splash_lib.dart';
 import 'package:weight_tracker/router/app_pages.dart';
 
-import '../../app/module/sign_in/sign_in_lib.dart';
+import '../../app/modules/sign_in/sign_in_lib.dart';
 
 
 part 'custom_field.dart';
