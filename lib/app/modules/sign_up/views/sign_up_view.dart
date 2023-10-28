@@ -61,6 +61,10 @@ class SignUpView extends StatelessWidget {
                                 customColor: colorConstant.splashYellow),
                           ),
                           customField.FieldText(
+                            title: stringConstant.name,
+                            teController: context.read<SignUpCubit>().tecName,
+                          ),
+                          customField.FieldText(
                             title: stringConstant.email,
                             teController: context.read<SignUpCubit>().tecEmail,
                           ),

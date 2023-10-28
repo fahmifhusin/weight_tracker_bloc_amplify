@@ -16,6 +16,7 @@ class StringConstant{
   final String headerSignUp = 'Embark on your journey to a healthier you with our\nWeight Tracker app';
   final String signUp = 'Sign Up';
   final String emailOrPhone = 'Email / Phone Number';
+  final String name = 'Full Name';
   final String email = 'Email';
   final String phoneNumber = 'Phone Number';
   final String password = 'Password';

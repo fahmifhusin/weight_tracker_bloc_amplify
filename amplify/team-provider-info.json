@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-weighttracker-dev-225904-authRole",
+      "UnauthRoleArn": "arn:aws:iam::945478390446:role/amplify-weighttracker-dev-225904-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::945478390446:role/amplify-weighttracker-dev-225904-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-weighttracker-dev-225904-deployment",
+      "UnauthRoleName": "amplify-weighttracker-dev-225904-unauthRole",
+      "StackName": "amplify-weighttracker-dev-225904",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:945478390446:stack/amplify-weighttracker-dev-225904/ede10020-75aa-11ee-87e0-029dede7538b",
+      "AmplifyAppId": "d3qg12oepvk7fc"
+    }
+  }
+}
