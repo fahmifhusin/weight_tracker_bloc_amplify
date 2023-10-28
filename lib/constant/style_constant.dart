@@ -21,11 +21,13 @@ class StyleConstant {
 
   TextStyle Text20Heading1({
     Color customColor = Colors.black,
+    double? customHeight,
   }) {
     return TextStyle(
       fontWeight: fontwBold,
       color: customColor,
       fontSize: dimensionConstant.spacing20,
+      height: customHeight,
     );
   }
 
@@ -45,7 +47,10 @@ class StyleConstant {
     );
   }
 
-  TextStyle Text14Body1({Color customColor = Colors.black}) {
+  TextStyle Text14Body1({
+    Color customColor = Colors.black,
+    bool isSemiBold = true,
+  }) {
     return TextStyle(
       fontWeight: fontwRegular,
       color: customColor,
@@ -63,19 +68,21 @@ class StyleConstant {
 
   Widget GeneralAppPage(
       {required Widget body,
+      bool isDisableScroll = false,
       bool isEnableBack = true,
-      Function? customFunctionBack, Color? pageColor}) {
+      Function? customFunctionBack,
+      Color? pageColor}) {
     return WillPopScope(
       onWillPop: () async {
         if (customFunctionBack != null) {
           customFunctionBack;
         }
-       return isEnableBack;
+        return isEnableBack;
       },
       child: SafeArea(
           child: Scaffold(
-          backgroundColor: pageColor,
-        body: body,
+        backgroundColor: pageColor,
+        body: isDisableScroll ? body : SingleChildScrollView(child: body),
       )),
     );
   }

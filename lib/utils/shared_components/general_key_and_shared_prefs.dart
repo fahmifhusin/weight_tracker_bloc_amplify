@@ -21,4 +21,6 @@ class GeneralKeyAndSharedPrefs {
   ];
 
   BuildContext get ctxRoute => AppPages.routePages.routerDelegate.navigatorKey.currentContext!;
+
+
 }

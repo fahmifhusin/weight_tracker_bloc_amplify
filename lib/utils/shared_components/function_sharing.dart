@@ -8,4 +8,7 @@ class FunctionSharing {
   factory FunctionSharing() {
     return _functionSharing;
   }
+
+  double get screenWidth => MediaQuery.of(generalKeys.ctxRoute).size.width;
+  double get screenHeight => MediaQuery.of(generalKeys.ctxRoute).size.height;
 }
