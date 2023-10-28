@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:weight_tracker/app/module/counter/counter.dart';
+import 'package:weight_tracker/app/module/sign_in/sign_in_lib.dart';
 import 'package:weight_tracker/constant/constants.dart';
 
 import '../app/module/splash/splash_lib.dart';
@@ -19,8 +19,8 @@ class AppPages{
         builder: (context, state) => SplashView(),
       ),
       GoRoute(
-        path: Routes.COUNTER,
-        builder: (context, state) => CounterView(),
+        path: Routes.SIGN_IN,
+        builder: (context, state) => SignInView(),
       ),
     ],
   ); 

@@ -11,7 +11,7 @@ class SplashView extends StatelessWidget {
       body: BlocListener<SplashCubit, SplashState>(
         listener: (ctx, state) {
           if (state is SplashSuccess) {
-            ctx.go(Routes.COUNTER);
+            ctx.go(Routes.SIGN_IN);
           }
         },
         child: Center(

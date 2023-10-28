@@ -16,6 +16,6 @@ class GeneralKeyAndSharedPrefs {
 
   final List<BlocProvider> listBlocProvider = [
     BlocProvider<SplashCubit>(create: (_)=>SplashCubit()),
-    BlocProvider<CounterCubit>(create: (_)=>CounterCubit()),
+    BlocProvider<SignInCubit>(create: (_)=>SignInCubit()),
   ];
 }
