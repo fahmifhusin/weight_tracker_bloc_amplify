@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weight_tracker/constant/constants.dart';
 import 'package:weight_tracker/router/app_pages.dart';
-
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: AppPages.routePages,///use go router
-    );
+    return MultiBlocProvider(
+        providers: generalKeys.listBlocProvider,
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          routerConfig: AppPages.routePages,
+
+          ///use go router
+        ));
   }
 }

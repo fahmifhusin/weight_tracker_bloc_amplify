@@ -1,6 +1,9 @@
 library shared_components;
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weight_tracker/app/module/counter/counter.dart';
+import 'package:weight_tracker/app/module/splash/splash_lib.dart';
 
 
 part 'custom_field.dart';
