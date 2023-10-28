@@ -10,6 +10,11 @@
       "StackName": "amplify-weighttracker-dev-225904",
       "StackId": "arn:aws:cloudformation:ap-southeast-2:945478390446:stack/amplify-weighttracker-dev-225904/ede10020-75aa-11ee-87e0-029dede7538b",
       "AmplifyAppId": "d3qg12oepvk7fc"
+    },
+    "categories": {
+      "auth": {
+        "weighttracker68e739e1": {}
+      }
     }
   }
 }
