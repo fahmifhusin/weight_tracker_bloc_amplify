@@ -1,36 +1,26 @@
 part of dashboard_lib;
 
 class DashboardView extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    context.read<DashboardCubit>().getUserLoggedIn();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Dashboard'),
-      ),
+    context.read<DashboardCubit>().setDataDashboard();
+    return styleConstant.GeneralAppPage(
+      customAppBarColor: colorConstant.neutralShadowDarker,
+      pageColor: colorConstant.naturalWhite,
       body: Padding(
-        padding: EdgeInsets.all(
-          dimensionConstant.spacing16,
+        padding: EdgeInsets.symmetric(
+          horizontal: dimensionConstant.spacing16,
+          vertical: dimensionConstant.spacing32,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BlocBuilder<DashboardCubit, DashboardState>(
-              builder: (ctx, state) => Column(
-                children: [
-                  Text(
-                      'Name : ${state is DashboardUserLoaded ? context.read<DashboardCubit>().userName??'-' : '...'}'),
-                  Text(
-                      'Current Weight ${state is DashboardUserLoaded ? context.read<DashboardCubit>().currentWeight??'-' : '...'}'),
-                  Text(
-                      'Weight Goals ${state is DashboardUserLoaded ? context.read<DashboardCubit>().weightGoals??'-' : '...'}'),
-                ],
-              ),
-            ),
+           AccountPreview(),
+            ListWeightData(),
             generalButtons.PrimaryButton(
-                function: () =>
-                    context.read<DashboardCubit>().logoutFromDashboard(),
-                btnTitle: stringConstant.signOut),
+                function: () =>context.read<DashboardCubit>().addDataWeight(),
+                btnTitle: stringConstant.addWeightData),
+
           ],
         ),
       ),

@@ -40,9 +40,23 @@ class StringConstant {
 
   ///dashboard
   final String signOut = 'Sign Out';
+  final String kilo = 'Kg';
+  final String initialWeight = 'Initial Weight';
+  final String yourWeight = 'Your Weight';
+  final String yourCurrentWeight = 'Your Current Weight';
+  final String yourGoals = 'Your Goals';
+  final String hello = 'Hello, ';
+  final String add = 'Add';
+  final String edit = 'Edit';
+  final String delete = 'Delete';
+  final String signOutConfirmationMsg = 'Are you sure?';
+  final String addWeightData = 'Add Weight Data';
+  final String addWeightMsg = 'Insert your current weight';
+  final String editWeightMsg = 'Edit your weight data';
 
   ///other
   final String generalMsgError = 'An error occurred, please try again in a few moments.';
+  final String appTitle = 'Weight Tracker';
 
   ///env
   final String development = 'Development';

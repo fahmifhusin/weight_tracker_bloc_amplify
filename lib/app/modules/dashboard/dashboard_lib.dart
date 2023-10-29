@@ -11,7 +11,9 @@ import 'package:weight_tracker/constant/constants.dart';
 import '../../../router/app_routes.dart';
 
 ///components
-
+part 'components/item_outline_card_dashboard.dart';
+part 'components/account_preview.dart';
+part 'components/list_weight_data.dart';
 ///controllers
 part 'cubit/dashboard_controller.dart';
 part 'cubit/dashboard_state.dart';

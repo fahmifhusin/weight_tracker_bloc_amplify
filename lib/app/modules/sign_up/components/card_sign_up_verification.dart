@@ -30,7 +30,7 @@ class CardSignUpVerification extends StatelessWidget {
         ),
         Container(
           height: dimensionConstant.spacing20,
-          width: MediaQuery.of(context).size.width,
+          width: functionSharing.screenWidth,
         ),
       ],
     );

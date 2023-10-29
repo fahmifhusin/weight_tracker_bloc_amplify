@@ -12,8 +12,10 @@ class ParamConstant {
   final String weightGoals = 'custom:weightgoals';
   final String name = 'name';
   final String phoneNumber = 'phone_number';
+  final String initialWeight = 'initWeight';
   final String currentWeight = 'custom:currentweight';
   final String email = 'email';
+  final String saveDate = 'saveDate';
 
 
 }

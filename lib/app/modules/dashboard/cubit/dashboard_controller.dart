@@ -2,18 +2,30 @@ part of dashboard_lib;
 
 class DashboardCubit extends Cubit<DashboardState> {
   DashboardCubit() : super(const DashboardInitial());
+
+  List _dummyListWeight = [
+    {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
+    {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
+    {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
+    {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
+    {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
+    {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
+  ];
+
   List attributeData = [];
   String? _userName;
   String? _currentWeight;
   String? _weightGoals;
 
+  List get listWeight => _dummyListWeight;
+
   String? get userName => _userName;
 
-  String? get currentWeight => _currentWeight;
+  String? get initialWeight => _currentWeight;
 
   String? get weightGoals => _weightGoals;
 
-  Future<void> fetchCurrentUserAttributes() async {
+  Future<void> _fetchCurrentUserAttributes() async {
     try {
       final result = await Amplify.Auth.fetchUserAttributes();
       for (final element in result) {
@@ -25,7 +37,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     }
   }
 
-  String getGenerateAttribute({required String argument}) {
+  String _getGenerateAttribute({required String argument}) {
     String value = '';
     for (int i = 0; i < attributeData.length; i++) {
       if (attributeData[i].toString().contains(argument)) {
@@ -35,13 +47,29 @@ class DashboardCubit extends Cubit<DashboardState> {
     return value;
   }
 
-  Future<void> getUserLoggedIn() async {
-    await fetchCurrentUserAttributes().then((value) {
-      _userName = getGenerateAttribute(argument: argument.name);
-      _weightGoals = getGenerateAttribute(argument: argument.weightGoals);
-      _currentWeight = getGenerateAttribute(argument: argument.currentWeight);
+  Future<void> setDataDashboard() async {
+    await _fetchCurrentUserAttributes().then((_) {
+      _userName = _getGenerateAttribute(argument: argument.name);
+      _weightGoals = _getGenerateAttribute(argument: argument.weightGoals);
+      _currentWeight = _getGenerateAttribute(argument: argument.currentWeight);
       emit(DashboardUserLoaded());
     });
+  }
+
+  void addDataWeight() {
+    generalDialog.showDialogWeightManagement(
+      title: stringConstant.addWeightMsg,
+      btnTitle: stringConstant.add,
+      function: () => logger.d('tap'),
+    );
+  }
+
+  void editDataWeight() {
+    generalDialog.showDialogWeightManagement(
+      title: stringConstant.editWeightMsg,
+      btnTitle: stringConstant.edit,
+      function: () => logger.d('tap'),
+    );
   }
 
   void logoutFromDashboard() {

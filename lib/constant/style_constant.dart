@@ -19,6 +19,16 @@ class StyleConstant {
     );
   }
 
+  TextStyle Text28Heading1({
+    Color customColor = Colors.black,
+  }) {
+    return TextStyle(
+      fontWeight: fontwBold,
+      color: customColor,
+      fontSize: dimensionConstant.spacing28,
+    );
+  }
+
   TextStyle Text22Heading1({
     Color customColor = Colors.black,
     double? customHeight,
@@ -87,7 +97,7 @@ class StyleConstant {
       Function? customFunctionBack,
       Color? pageColor}) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: (customAppBarColor != null || customAppBarColor != colorConstant.naturalWhite) && !Platform.isIOS
+      value: customAppBarColor != null && customAppBarColor != colorConstant.naturalWhite && !Platform.isIOS
           ? SystemUiOverlayStyle(
               statusBarColor: customAppBarColor,
               statusBarBrightness: Brightness.light,
