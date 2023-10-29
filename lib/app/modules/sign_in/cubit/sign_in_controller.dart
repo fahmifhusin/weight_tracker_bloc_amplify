@@ -13,6 +13,11 @@ class SignInCubit extends Cubit<SignInState> {
     isSignInDataIsValid ? emit(SignInFormVerified()) : emit(SignInInitial());
   }
 
+  void clearFieldSignIn(){
+    tecEmailOrPhone.text = '';
+    tecPassword.text = '';
+  }
+
   Future<void> doSignIn() async {
     if (isSignInDataIsValid) {
       ///load api
@@ -54,6 +59,7 @@ class SignInCubit extends Cubit<SignInState> {
   }
 
   void gotoDashboardAfterLogin() {
+    clearFieldSignIn();
     generalKeys.ctxRoute.replace(Routes.DASHBOARD);
   }
 }

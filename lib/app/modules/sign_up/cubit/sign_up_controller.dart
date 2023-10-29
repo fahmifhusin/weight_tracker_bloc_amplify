@@ -93,7 +93,6 @@ class SignUpCubit extends Cubit<SignUpState> {
             isError: false,
           );
           emit(SignUpSuccess());
-          clearFieldSignUp();
           gotoSignInFromRegister();
         });
       } on AuthErrorResult catch (e) {
@@ -116,6 +115,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   }
 
   void gotoSignInFromRegister() {
+    clearFieldSignUp();
     generalKeys.ctxRoute.replace(Routes.SIGN_IN);
   }
 

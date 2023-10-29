@@ -80,8 +80,9 @@ class SignInView extends StatelessWidget {
                               isActive: state is SignInLoading ||
                                   state is SignInFormVerified,
                               isLoading: state is SignInLoading,
-                              function: () =>
-                                  ctx.read<SignInCubit>().doSignIn(),
+                              function: () => state is SignInLoading
+                                  ? null
+                                  : ctx.read<SignInCubit>().doSignIn(),
                               btnTitle: stringConstant.signIn,
                             ),
                           ),

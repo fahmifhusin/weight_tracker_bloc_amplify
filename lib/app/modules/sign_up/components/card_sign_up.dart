@@ -63,7 +63,9 @@ class CardSignUp extends StatelessWidget {
           builder: (ctx, state) => generalButtons.PrimaryButton(
               isActive: state is SignUpFormVerified || state is SignUpLoading,
               isLoading: state is SignUpLoading,
-              function: () => ctx.read<SignUpCubit>().doSignUp(),
+              function: () => state is SignUpLoading
+                  ? null
+                  : ctx.read<SignUpCubit>().doSignUp(),
               btnTitle: stringConstant.signUp),
         ),
         Container(

@@ -22,7 +22,9 @@ class CardSignUpVerification extends StatelessWidget {
           builder: (ctx, state) => generalButtons.PrimaryButton(
             isActive: state is SignUpFormCodeVerified || state is SignUpLoadCodeVerified,
             isLoading: state is SignUpLoadCodeVerified,
-            function: () => ctx.read<SignUpCubit>().verifyCodeSignUp(),
+            function: () => state is SignUpLoadCodeVerified
+                ? null
+                :ctx.read<SignUpCubit>().verifyCodeSignUp(),
             btnTitle: stringConstant.verifySignUp,
           ),
         ),
