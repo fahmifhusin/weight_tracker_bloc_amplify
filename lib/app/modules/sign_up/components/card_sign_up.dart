@@ -19,10 +19,12 @@ class CardSignUp extends StatelessWidget {
         customField.FieldText(
             title: stringConstant.email,
             teController: context.read<SignUpCubit>().tecEmail,
+            inputType: TextInputType.emailAddress,
             onChange: (_) => context.read<SignUpCubit>().verifySignUpForm()),
         customField.FieldText(
             title: stringConstant.phoneNumber,
             teController: context.read<SignUpCubit>().tecPhoneNumber,
+            inputType: TextInputType.number,
             onChange: (_) => context.read<SignUpCubit>().verifySignUpForm()),
         customField.FieldPassword(
             title: stringConstant.password,

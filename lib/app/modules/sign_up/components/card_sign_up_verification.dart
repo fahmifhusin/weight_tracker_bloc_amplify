@@ -15,6 +15,7 @@ class CardSignUpVerification extends StatelessWidget {
         customField.FieldText(
             title: stringConstant.verificationCode,
             teController: context.read<SignUpCubit>().tecVerifCode,
+            inputType: TextInputType.number,
             onChange: (_) =>
                 context.read<SignUpCubit>().verifySignUpVerificationForm()),
         BlocBuilder<SignUpCubit, SignUpState>(

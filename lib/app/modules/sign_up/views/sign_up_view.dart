@@ -83,19 +83,6 @@ class SignUpView extends StatelessWidget {
                 ],
               ),
             ),
-            Visibility(
-              visible: state is SignUpVerification,
-              child: IconButton(
-                padding: EdgeInsets.only(
-                  left: dimensionConstant.spacing16,
-                ),
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: colorConstant.naturalWhite,
-                ),
-                onPressed: () => context.read<SignUpCubit>().goBackToSignUp(),
-              ),
-            ),
           ],
         ),
       ),

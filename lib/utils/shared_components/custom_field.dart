@@ -14,6 +14,8 @@ class CustomField {
     required String title,
     required TextEditingController teController,
     Function(String)? onChange,
+    required TextInputType inputType,
+    required TextInputAction inputAction,
   }) {
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -38,6 +40,8 @@ class CustomField {
               controller: teController,
               maxLines: 1,
               obscureText: isHidePassword,
+              keyboardType: inputType,
+              textInputAction: inputAction,
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderSide:
@@ -69,22 +73,32 @@ class CustomField {
     required String title,
     TextEditingController? teController,
     Function(String)? onChange,
+    TextInputType inputType = TextInputType.text,
+    TextInputAction inputAction = TextInputAction.next,
   }) {
     return _BaseCustomField(
-        title: title,
-        teController: teController ?? TextEditingController(),
-        onChange: onChange);
+      title: title,
+      teController: teController ?? TextEditingController(),
+      onChange: onChange,
+      inputAction: inputAction,
+      inputType: inputType,
+    );
   }
 
   Widget FieldPassword({
     required String title,
     TextEditingController? teController,
     Function(String)? onChange,
+    TextInputType inputType = TextInputType.text,
+    TextInputAction inputAction = TextInputAction.next,
   }) {
     return _BaseCustomField(
-        title: title,
-        isHidePassword: true,
-        teController: teController ?? TextEditingController(),
-        onChange: onChange);
+      title: title,
+      isHidePassword: true,
+      teController: teController ?? TextEditingController(),
+      onChange: onChange,
+      inputAction: inputAction,
+      inputType: inputType,
+    );
   }
 }
