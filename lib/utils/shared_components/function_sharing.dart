@@ -15,7 +15,7 @@ class FunctionSharing {
       await Amplify.addPlugin(auth);
 
       // call Amplify.configure to use the initialized categories in your app
-      await Amplify.configure(amplifyconfig);
+      await Amplify.configure(amplifyconfig).then((_) => Amplify.Auth.signOut());
     } on Exception catch (e) {
       logger.d('An error occurred configuring Amplify: $e');
     }

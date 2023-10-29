@@ -7,7 +7,7 @@ class SignInCubit extends Cubit<SignInState> {
   TextEditingController tecPassword = TextEditingController();
 
   bool get isSignInDataIsValid =>
-      tecEmailOrPhone.text != '' && tecPassword != '';
+      tecEmailOrPhone.text != '' && tecPassword.text != '';
 
   void verifySignUpForm() {
     isSignInDataIsValid ? emit(SignInFormVerified()) : emit(SignInInitial());
@@ -27,11 +27,6 @@ class SignInCubit extends Cubit<SignInState> {
                 username: tecEmailOrPhone.text, password: tecPassword.text)
             .then((value) {
           logger.d('result is :${value}');
-          generalDialog.showGeneralSnackbar(
-            message: stringConstant.successVerify,
-            customColor: Colors.lightGreen,
-            isError: false,
-          );
           emit(SignInSuccess());
           gotoDashboardAfterLogin();
         });

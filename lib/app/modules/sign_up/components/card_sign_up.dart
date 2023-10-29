@@ -34,31 +34,28 @@ class CardSignUp extends StatelessWidget {
             title: stringConstant.confirmPassword,
             teController: context.read<SignUpCubit>().tecPasswordConfirm,
             onChange: (_) => context.read<SignUpCubit>().verifySignUpForm()),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     Expanded(
-        //       child: customField.FieldText(
-        //         title: stringConstant.currentWeight,
-        //         teController: context
-        //             .read<SignUpCubit>()
-        //             .tecCurrentWeight,
-        //       ),
-        //     ),
-        //     SizedBox(
-        //       width: dimensionConstant.spacing16,
-        //     ),
-        //     Expanded(
-        //       child: customField.FieldText(
-        //         title: stringConstant.weightGoals,
-        //         teController: context
-        //             .read<SignUpCubit>()
-        //             .tecWeightGoals,
-        //       ),
-        //     ),
-        //   ],
-        // ),
-
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: customField.FieldText(
+                title: stringConstant.currentWeight,
+                teController: context.read<SignUpCubit>().tecCurrentWeight,
+                onChange: (_) => context.read<SignUpCubit>().verifySignUpForm(),
+              ),
+            ),
+            SizedBox(
+              width: dimensionConstant.spacing16,
+            ),
+            Expanded(
+              child: customField.FieldText(
+                title: stringConstant.weightGoals,
+                teController: context.read<SignUpCubit>().tecWeightGoals,
+                onChange: (_) => context.read<SignUpCubit>().verifySignUpForm(),
+              ),
+            ),
+          ],
+        ),
         BlocBuilder<SignUpCubit, SignUpState>(
           builder: (ctx, state) => generalButtons.PrimaryButton(
               isActive: state is SignUpFormVerified || state is SignUpLoading,

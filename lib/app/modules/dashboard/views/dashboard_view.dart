@@ -16,8 +16,16 @@ class DashboardView extends StatelessWidget {
         child: Column(
           children: [
             BlocBuilder<DashboardCubit, DashboardState>(
-              builder: (ctx, state) => Text(
-                  '${stringConstant.hi} ${state is DashboardUserLoaded ? context.read<DashboardCubit>().dataUser?.username : '...'}'),
+              builder: (ctx, state) => Column(
+                children: [
+                  Text(
+                      'Name : ${state is DashboardUserLoaded ? context.read<DashboardCubit>().userName??'-' : '...'}'),
+                  Text(
+                      'Current Weight ${state is DashboardUserLoaded ? context.read<DashboardCubit>().currentWeight??'-' : '...'}'),
+                  Text(
+                      'Weight Goals ${state is DashboardUserLoaded ? context.read<DashboardCubit>().weightGoals??'-' : '...'}'),
+                ],
+              ),
             ),
             generalButtons.PrimaryButton(
                 function: () =>

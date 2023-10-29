@@ -18,9 +18,9 @@ class SignUpCubit extends Cubit<SignUpState> {
       tecPassword.text != '' &&
       tecPasswordConfirm.text != '' &&
       tecPassword.text == tecPasswordConfirm.text
-      // &&
-      // tecCurrentWeight.text != '' &&
-      // tecWeightGoals.text != ''
+      &&
+      tecCurrentWeight.text != '' &&
+      tecWeightGoals.text != ''
       ;
 
   void clearFieldSignUp() {
@@ -52,9 +52,11 @@ class SignUpCubit extends Cubit<SignUpState> {
           username: tecEmail.text,
           password: tecPassword.text,
           options: SignUpOptions(userAttributes: {
-            // AuthUserAttributeKey.phoneNumberVerified: tecPhoneNumber.text,
-            // AuthUserAttributeKey.name: tecName.text,
+            AuthUserAttributeKey.phoneNumber: tecPhoneNumber.text,
+            AuthUserAttributeKey.name: tecName.text,
             AuthUserAttributeKey.email: tecEmail.text,
+            const CognitoUserAttributeKey.custom('currentWeight'):tecCurrentWeight.text,
+            const CognitoUserAttributeKey.custom('weightGoals'):tecWeightGoals.text,
           }),
         ).then((value) {
           logger.d('response : $value');

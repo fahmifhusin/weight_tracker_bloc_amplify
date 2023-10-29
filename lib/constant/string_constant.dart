@@ -23,8 +23,8 @@ class StringConstant {
   final String phoneNumber = 'Phone Number';
   final String password = 'Password';
   final String confirmPassword = 'Confirm Password';
-  final String currentWeight = 'Current Weight';
-  final String weightGoals = 'Weight Goals';
+  final String currentWeight = 'Current Weight (Kg)';
+  final String weightGoals = 'Weight Goals (Kg)';
   final String or = 'or';
   final String alreadyHaveAccount = 'Already have an account? ';
   final String verifySignUp = 'Verify my Account';
