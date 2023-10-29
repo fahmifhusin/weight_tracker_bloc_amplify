@@ -48,7 +48,7 @@ class ListWeightData extends StatelessWidget {
                             ),
                           ),
                           TextButton(
-                              onPressed: () => logger.d('tap'),
+                              onPressed: () => context.read<DashboardCubit>().deleteDataWeight(),
                               child: Text(
                                 stringConstant.delete,
                                 style: styleConstant.Text14Body1(

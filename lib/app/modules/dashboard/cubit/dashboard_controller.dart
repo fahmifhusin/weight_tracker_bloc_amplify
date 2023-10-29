@@ -72,8 +72,23 @@ class DashboardCubit extends Cubit<DashboardState> {
     );
   }
 
+  void deleteDataWeight() {
+    generalDialog.showDialogConfirmation(
+        titleMsg: stringConstant.signOutConfirmationMsg,
+        titleBtnLeft: stringConstant.delete,
+        titleBtnRight: stringConstant.cancel,
+        btnLeftAction: () => logger.d('tap'),
+        btnRightAction: () => generalKeys.ctxRoute.pop());
+  }
+
   void logoutFromDashboard() {
-    Amplify.Auth.signOut().then((_) => gotoSignInFromDashboard());
+    generalDialog.showDialogConfirmation(
+        titleMsg: stringConstant.signOutConfirmationMsg,
+        titleBtnLeft: stringConstant.signOut,
+        titleBtnRight: stringConstant.no,
+        btnLeftAction: () =>
+            Amplify.Auth.signOut().then((_) => gotoSignInFromDashboard()),
+        btnRightAction: () => generalKeys.ctxRoute.pop());
   }
 
   void gotoSignInFromDashboard() {

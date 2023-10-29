@@ -57,6 +57,9 @@ class StringConstant {
   ///other
   final String generalMsgError = 'An error occurred, please try again in a few moments.';
   final String appTitle = 'Weight Tracker';
+  final String yes = 'Yes';
+  final String cancel = 'Cancel';
+  final String no = 'No';
 
   ///env
   final String development = 'Development';

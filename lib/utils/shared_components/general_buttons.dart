@@ -13,7 +13,8 @@ class GeneralButtons {
       {required Function function,
       required String btnTitle,
       required bool isLoading,
-      required bool isActive}) {
+      required bool isActive,
+      Color? customBtnColor}) {
     return Padding(
       padding: EdgeInsets.only(
         top: dimensionConstant.spacing20,
@@ -23,7 +24,9 @@ class GeneralButtons {
             elevation: 0,
             foregroundColor: colorConstant.naturalWhite,
             backgroundColor: isActive
-                ? colorConstant.primaryBlue
+                ? customBtnColor != null
+                    ? customBtnColor
+                    : colorConstant.primaryBlue
                 : colorConstant.neutralShadow,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -55,12 +58,13 @@ class GeneralButtons {
     required String btnTitle,
     bool isLoading = false,
     bool isActive = true,
+    Color? customBtnColor,
   }) {
     return _BaseGeneralButton(
-      function: function,
-      btnTitle: btnTitle,
-      isLoading: isLoading,
-      isActive: isActive,
-    );
+        function: function,
+        btnTitle: btnTitle,
+        isLoading: isLoading,
+        isActive: isActive,
+        customBtnColor: customBtnColor);
   }
 }
