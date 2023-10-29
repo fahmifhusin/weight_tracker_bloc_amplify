@@ -15,12 +15,12 @@ class GeneralKeyAndSharedPrefs {
   final String roboto = 'Roboto';
 
   final List<BlocProvider> listBlocProvider = [
-    BlocProvider<SplashCubit>(create: (_)=>SplashCubit()),
-    BlocProvider<SignInCubit>(create: (_)=>SignInCubit()),
-    BlocProvider<SignUpCubit>(create: (_)=>SignUpCubit()),
+    BlocProvider<SplashCubit>(create: (_) => SplashCubit()),
+    BlocProvider<SignInCubit>(create: (_) => SignInCubit()),
+    BlocProvider<SignUpCubit>(create: (_) => SignUpCubit()),
+    BlocProvider<DashboardCubit>(create: (_) => DashboardCubit())
   ];
 
-  BuildContext get ctxRoute => AppPages.routePages.routerDelegate.navigatorKey.currentContext!;
-
-
+  BuildContext get ctxRoute =>
+      AppPages.routePages.routerDelegate.navigatorKey.currentContext!;
 }

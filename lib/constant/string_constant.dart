@@ -38,6 +38,9 @@ class StringConstant {
   final String signIn = 'Sign in';
   final String dontHaveAccount = 'Don\'t have an account? ';
 
+  ///dashboard
+  final String signOut = 'Sign Out';
+
   ///other
   final String generalMsgError = 'An error occurred, please try again in a few moments.';
 

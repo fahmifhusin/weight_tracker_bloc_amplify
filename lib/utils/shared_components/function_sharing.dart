@@ -21,6 +21,12 @@ class FunctionSharing {
     }
   }
 
+  Future <AuthUser?> getUserData() async {
+     AuthUser? userData;
+    await Amplify.Auth.getCurrentUser().then((value) => userData = value);
+    return userData;
+  }
+
   double get screenWidth => MediaQuery.of(generalKeys.ctxRoute).size.width;
   double get screenHeight => MediaQuery.of(generalKeys.ctxRoute).size.height;
 }

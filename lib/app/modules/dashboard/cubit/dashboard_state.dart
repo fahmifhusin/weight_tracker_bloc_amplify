@@ -13,6 +13,10 @@ class DashboardLoading extends DashboardState {
   const DashboardLoading();
 }
 
+class DashboardUserLoaded extends DashboardState {
+  const DashboardUserLoaded();
+}
+
 class DashboardSuccess extends DashboardState {
   const DashboardSuccess();
 }
