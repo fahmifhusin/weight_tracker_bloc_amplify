@@ -77,7 +77,10 @@ class DashboardCubit extends Cubit<DashboardState> {
         titleMsg: stringConstant.signOutConfirmationMsg,
         titleBtnLeft: stringConstant.delete,
         titleBtnRight: stringConstant.cancel,
-        btnLeftAction: () => logger.d('tap'),
+        btnLeftAction: (){
+          logger.d('tap');
+          generalKeys.ctxRoute.pop();
+        },
         btnRightAction: () => generalKeys.ctxRoute.pop());
   }
 
@@ -87,7 +90,10 @@ class DashboardCubit extends Cubit<DashboardState> {
         titleBtnLeft: stringConstant.signOut,
         titleBtnRight: stringConstant.no,
         btnLeftAction: () =>
-            Amplify.Auth.signOut().then((_) => gotoSignInFromDashboard()),
+            Amplify.Auth.signOut().then((_){
+              generalKeys.ctxRoute.pop();
+              gotoSignInFromDashboard();
+            }),
         btnRightAction: () => generalKeys.ctxRoute.pop());
   }
 
