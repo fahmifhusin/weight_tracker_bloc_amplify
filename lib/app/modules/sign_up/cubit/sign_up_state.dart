@@ -21,6 +21,18 @@ class SignUpSuccess extends SignUpState {
   const SignUpSuccess();
 }
 
+class SignUpFormVerified extends SignUpState {
+  const SignUpFormVerified();
+}
+
+class SignUpFormCodeVerified extends SignUpState {
+  const SignUpFormCodeVerified();
+}
+
+class SignUpLoadCodeVerified extends SignUpState {
+  const SignUpLoadCodeVerified();
+}
+
 class SignUpError extends SignUpState {
   final String message;
   const SignUpError(this.message);

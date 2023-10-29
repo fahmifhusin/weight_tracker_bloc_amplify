@@ -29,15 +29,32 @@ class SignUpView extends StatelessWidget {
                   dimensionConstant.spacing24),
               child: Column(
                 children: [
-                  Text(
-                    state is SignUpVerification
-                        ? stringConstant.headerSignUpVerification
-                        : stringConstant.headerSignUp,
-                    textAlign: TextAlign.center,
-                    style: styleConstant.Text22Heading1(
-                        customHeight: 1.5,
-                        customColor: colorConstant.naturalWhite),
-                  ),
+                  state is SignUpVerification
+                      ? RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                              text:
+                                  '${stringConstant.headerSignUpVerification}\n',
+                              style: styleConstant.Text22Heading1(
+                                  customHeight: 1.5,
+                                  customColor: colorConstant.naturalWhite),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text:
+                                      context.read<SignUpCubit>().tecEmail.text,
+                                  style: styleConstant.Text20Heading1(
+                                    customHeight: 1.5,
+                                  ),
+                                ),
+                              ]),
+                        )
+                      : Text(
+                          stringConstant.headerSignUp,
+                          textAlign: TextAlign.center,
+                          style: styleConstant.Text22Heading1(
+                              customHeight: 1.5,
+                              customColor: colorConstant.naturalWhite),
+                        ),
                   SizedBox(
                     height: dimensionConstant.spacing20,
                   ),
@@ -56,7 +73,9 @@ class SignUpView extends StatelessWidget {
                             vertical: dimensionConstant.spacing20,
                             horizontal: dimensionConstant.spacing16,
                           ),
-                          child: state is SignUpVerification
+                          child: state is SignUpVerification ||
+                                  state is SignUpFormCodeVerified ||
+                                  state is SignUpLoadCodeVerified
                               ? CardSignUpVerification()
                               : CardSignUp(),
                         )),

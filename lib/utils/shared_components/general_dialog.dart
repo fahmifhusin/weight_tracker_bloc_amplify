@@ -9,7 +9,8 @@ class GeneralDialog {
     return _generalDialog;
   }
 
-  void showGeneralSnackbar({required String message, required bool isError}) {
+  void showGeneralSnackbar(
+      {Color? customColor, required String message, required bool isError}) {
     ScaffoldMessenger.of(generalKeys.ctxRoute).removeCurrentSnackBar();
     ScaffoldMessenger.of(generalKeys.ctxRoute).showSnackBar(
       SnackBar(
@@ -20,7 +21,11 @@ class GeneralDialog {
             customColor: colorConstant.naturalWhite,
           ),
         ),
-        backgroundColor: isError ? Colors.red : colorConstant.primaryBlue,
+        backgroundColor: customColor != null
+            ? customColor
+            : isError
+                ? Colors.red
+                : colorConstant.primaryBlue,
       ),
     );
   }

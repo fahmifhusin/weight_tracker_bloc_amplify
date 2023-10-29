@@ -13,28 +13,25 @@ class CardSignUp extends StatelessWidget {
               customColor: colorConstant.splashYellow),
         ),
         customField.FieldText(
-          title: stringConstant.name,
-          teController: context.read<SignUpCubit>().tecName,
-        ),
+            title: stringConstant.name,
+            teController: context.read<SignUpCubit>().tecName,
+            onChange: (_) => context.read<SignUpCubit>().verifySignUpForm()),
         customField.FieldText(
-          title: stringConstant.email,
-          teController: context.read<SignUpCubit>().tecEmail,
-        ),
+            title: stringConstant.email,
+            teController: context.read<SignUpCubit>().tecEmail,
+            onChange: (_) => context.read<SignUpCubit>().verifySignUpForm()),
         customField.FieldText(
-          title: stringConstant.phoneNumber,
-          teController:
-          context.read<SignUpCubit>().tecPhoneNumber,
-        ),
+            title: stringConstant.phoneNumber,
+            teController: context.read<SignUpCubit>().tecPhoneNumber,
+            onChange: (_) => context.read<SignUpCubit>().verifySignUpForm()),
         customField.FieldPassword(
-          title: stringConstant.password,
-          teController:
-          context.read<SignUpCubit>().tecPassword,
-        ),
+            title: stringConstant.password,
+            teController: context.read<SignUpCubit>().tecPassword,
+            onChange: (_) => context.read<SignUpCubit>().verifySignUpForm()),
         customField.FieldPassword(
-          title: stringConstant.confirmPassword,
-          teController:
-          context.read<SignUpCubit>().tecPasswordConfirm,
-        ),
+            title: stringConstant.confirmPassword,
+            teController: context.read<SignUpCubit>().tecPasswordConfirm,
+            onChange: (_) => context.read<SignUpCubit>().verifySignUpForm()),
         // Row(
         //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
         //   children: [
@@ -59,13 +56,13 @@ class CardSignUp extends StatelessWidget {
         //     ),
         //   ],
         // ),
+
         BlocBuilder<SignUpCubit, SignUpState>(
-          builder: (ctx, state) =>
-              generalButtons.PrimaryButton(
-                  isLoading: state is SignUpLoading,
-                  function: () =>
-                      ctx.read<SignUpCubit>().doSignUp(),
-                  btnTitle: stringConstant.signUp),
+          builder: (ctx, state) => generalButtons.PrimaryButton(
+              isActive: state is SignUpFormVerified || state is SignUpLoading,
+              isLoading: state is SignUpLoading,
+              function: () => ctx.read<SignUpCubit>().doSignUp(),
+              btnTitle: stringConstant.signUp),
         ),
         Container(
           height: dimensionConstant.spacing20,
@@ -85,8 +82,7 @@ class CardSignUp extends StatelessWidget {
                   TextSpan(
                       text: stringConstant.signIn,
                       style: styleConstant.Text12SmallText(
-                          customColor:
-                          colorConstant.primaryBlue),
+                          customColor: colorConstant.primaryBlue),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () => context
                             .read<SignUpCubit>()

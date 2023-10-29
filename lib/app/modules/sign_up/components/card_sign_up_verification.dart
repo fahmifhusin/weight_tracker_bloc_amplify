@@ -8,18 +8,22 @@ class CardSignUpVerification extends StatelessWidget {
     return Wrap(
       children: [
         Text(
-          'Hi, ${context.read<SignUpCubit>().tecName.text}',
+          '${stringConstant.hi} ${context.read<SignUpCubit>().tecName.text}',
           style: styleConstant.Text22Heading1(
               customColor: colorConstant.splashYellow),
         ),
         customField.FieldText(
             title: stringConstant.verificationCode,
-            teController: context.read<SignUpCubit>().tecVerifCode),
+            teController: context.read<SignUpCubit>().tecVerifCode,
+            onChange: (_) =>
+                context.read<SignUpCubit>().verifySignUpVerificationForm()),
         BlocBuilder<SignUpCubit, SignUpState>(
           builder: (ctx, state) => generalButtons.PrimaryButton(
-              isLoading: state is SignUpLoading,
-              function: () => ctx.read<SignUpCubit>().verifyCodeSignUp(),
-              btnTitle: stringConstant.verifySignUp),
+            isActive: state is SignUpFormCodeVerified || state is SignUpLoadCodeVerified,
+            isLoading: state is SignUpLoadCodeVerified,
+            function: () => ctx.read<SignUpCubit>().verifyCodeSignUp(),
+            btnTitle: stringConstant.verifySignUp,
+          ),
         ),
         Container(
           height: dimensionConstant.spacing20,

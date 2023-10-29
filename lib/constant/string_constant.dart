@@ -15,7 +15,7 @@ class StringConstant {
   ///sign up
   final String headerSignUp =
       'Embark on your journey to a healthier you with our\nWeight Tracker app';
-  final String headerSignUpVerification = 'We have sent a verification code to your email, please enter the code in the field below';
+  final String headerSignUpVerification = 'We have sent a verification code to';
   final String signUp = 'Sign Up';
   final String emailOrPhone = 'Email / Phone Number';
   final String name = 'Full Name';
@@ -29,6 +29,8 @@ class StringConstant {
   final String alreadyHaveAccount = 'Already have an account? ';
   final String verifySignUp = 'Verify my Account';
   final String verificationCode = 'Verification Code';
+  final String successVerify ='Register account Success!';
+  final String hi = 'Hi,';
 
   ///sign in
   final String signInHeader =
