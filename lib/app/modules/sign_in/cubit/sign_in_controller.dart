@@ -6,21 +6,54 @@ class SignInCubit extends Cubit<SignInState> {
   TextEditingController tecEmailOrPhone = TextEditingController();
   TextEditingController tecPassword = TextEditingController();
 
-  bool get isSignInDataIsValid => tecEmailOrPhone.text != '' && tecPassword != '';
+  bool get isSignInDataIsValid =>
+      tecEmailOrPhone.text != '' && tecPassword != '';
 
-  void doSignIn(){
-    if(isSignInDataIsValid){
+  void verifySignUpForm() {
+    isSignInDataIsValid ? emit(SignInFormVerified()) : emit(SignInInitial());
+  }
+
+  Future<void> doSignIn() async {
+    if (isSignInDataIsValid) {
       ///load api
       emit(SignInLoading());
-      logger.d('email or phone : ${tecEmailOrPhone.text}');
-      logger.d('password : ${tecPassword.text}');
-      Future.delayed(const Duration(milliseconds: 1000), () {
-        emit(SignInSuccess());
-      });
+      try {
+        await Amplify.Auth.signIn(
+                username: tecEmailOrPhone.text, password: tecPassword.text)
+            .then((value) {
+          logger.d('result is :${value}');
+          generalDialog.showGeneralSnackbar(
+            message: stringConstant.successVerify,
+            customColor: Colors.lightGreen,
+            isError: false,
+          );
+          emit(SignInSuccess());
+          gotoDashboardAfterLogin();
+        });
+      } on AuthErrorResult catch (e) {
+        emit(SignInError('error'));
+        generalDialog.showGeneralSnackbar(
+            message: e.exception.message, isError: true);
+      } catch (e) {
+        logger.d('error nya : ${e}');
+        emit(SignInError('error'));
+        String errMsg = e
+            .toString()
+            .split('"message":')[1]
+            .split(',')[0]
+            .replaceAll('"', '');
+        generalDialog.showGeneralSnackbar(
+            message: errMsg != '' ? errMsg : stringConstant.generalMsgError,
+            isError: true);
+      }
     }
   }
 
-  void gotoSignupFromLogin(){
+  void gotoSignupFromLogin() {
     generalKeys.ctxRoute.replace(Routes.SIGN_UP);
+  }
+
+  void gotoDashboardAfterLogin() {
+    generalKeys.ctxRoute.replace(Routes.DASHBOARD);
   }
 }

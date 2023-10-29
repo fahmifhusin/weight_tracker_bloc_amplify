@@ -13,6 +13,11 @@ class SignInLoading extends SignInState {
   const SignInLoading();
 }
 
+class SignInFormVerified extends SignInState {
+  const SignInFormVerified();
+}
+
+
 class SignInSuccess extends SignInState {
   const SignInSuccess();
 }

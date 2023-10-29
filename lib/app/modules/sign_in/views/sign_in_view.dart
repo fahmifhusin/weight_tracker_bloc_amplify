@@ -64,19 +64,26 @@ class SignInView extends StatelessWidget {
                             title: stringConstant.emailOrPhone,
                             teController:
                                 context.read<SignInCubit>().tecEmailOrPhone,
+                            onChange: (_) =>
+                                context.read<SignInCubit>().verifySignUpForm(),
                           ),
                           customField.FieldPassword(
                             title: stringConstant.password,
                             teController:
                                 context.read<SignInCubit>().tecPassword,
+                            onChange: (_) =>
+                                context.read<SignInCubit>().verifySignUpForm(),
                           ),
                           BlocBuilder<SignInCubit, SignInState>(
                             builder: (ctx, state) =>
                                 generalButtons.PrimaryButton(
-                                    isLoading: state is SignInLoading,
-                                    function: () =>
-                                        ctx.read<SignInCubit>().doSignIn(),
-                                    btnTitle: stringConstant.signIn),
+                              isActive: state is SignInLoading ||
+                                  state is SignInFormVerified,
+                              isLoading: state is SignInLoading,
+                              function: () =>
+                                  ctx.read<SignInCubit>().doSignIn(),
+                              btnTitle: stringConstant.signIn,
+                            ),
                           ),
                           Container(
                             height: dimensionConstant.spacing20,
