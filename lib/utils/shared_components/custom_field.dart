@@ -12,7 +12,7 @@ class CustomField {
   Widget _BaseCustomField({
     bool isHidePassword = false,
     required String title,
-    required TextEditingController teController,
+    required TextEditingController? teController,
     Function(String)? onChange,
     required TextInputType inputType,
     required TextInputAction inputAction,
@@ -78,7 +78,7 @@ class CustomField {
   }) {
     return _BaseCustomField(
       title: title,
-      teController: teController ?? TextEditingController(),
+      teController: teController,
       onChange: onChange,
       inputAction: inputAction,
       inputType: inputType,
@@ -95,7 +95,7 @@ class CustomField {
     return _BaseCustomField(
       title: title,
       isHidePassword: true,
-      teController: teController ?? TextEditingController(),
+      teController: teController,
       onChange: onChange,
       inputAction: inputAction,
       inputType: inputType,
