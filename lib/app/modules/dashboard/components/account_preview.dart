@@ -77,7 +77,9 @@ class AccountPreview extends StatelessWidget {
                   style: styleConstant.Text14Body1(isSemiBold: true),
                 ),
                 Text(
-                  '80 ${stringConstant.kilo}',
+                  context.read<DashboardCubit>().listWeight.isNotEmpty
+                      ? '${context.read<DashboardCubit>().listWeight[0].currentWeight} ${stringConstant.kilo}'
+                      : state is DashboardUserLoaded ? context.read<DashboardCubit>().initialWeight ?? '-' : '...',
                   style: styleConstant.Text18Heading2(),
                 ),
               ],

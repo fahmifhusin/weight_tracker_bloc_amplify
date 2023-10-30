@@ -7,22 +7,16 @@ class DashboardCubit extends Cubit<DashboardState> {
 
   var _listWeight = <WeigtTrackerUserModel>[];
 
-  // List _dummyListWeight = [
-  //   {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
-  //   {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
-  //   {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
-  //   {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
-  //   {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
-  //   {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
-  // ];
-
   List attributeData = [];
   String? _userName;
   String? _currentWeight;
   String? _weightGoals;
 
+  void sortDataNewest(){
+    _listWeight.sort((a, b) => b.save_date!.compareTo(a.save_date!));
+  }
+
   List<WeigtTrackerUserModel> get listWeight => _listWeight;
-      // .sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
   String? get userName => _userName;
 
@@ -58,6 +52,7 @@ class DashboardCubit extends Cubit<DashboardState> {
       _weightGoals = _getGenerateAttribute(argument: argument.weightGoals);
       _currentWeight = _getGenerateAttribute(argument: argument.currentWeight);
       getDataWeight().then((_) {
+        sortDataNewest();
         emit(DashboardUserLoaded());
         logger.d('data weight : $_listWeight');
       });
@@ -163,6 +158,7 @@ class DashboardCubit extends Cubit<DashboardState> {
         titleBtnLeft: stringConstant.signOut,
         titleBtnRight: stringConstant.no,
         btnLeftAction: () => Amplify.Auth.signOut().then((_) {
+              _listWeight.clear();
               generalKeys.ctxRoute.pop();
               emit(DashboardInitial());
               gotoSignInFromDashboard();

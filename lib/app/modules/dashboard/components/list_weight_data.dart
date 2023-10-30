@@ -19,8 +19,8 @@ class ListWeightData extends StatelessWidget {
                     ),
                   ),
                   height: functionSharing.screenHeight * 0.4,
-                  margin:
-                      EdgeInsets.symmetric(vertical: dimensionConstant.spacing12),
+                  margin: EdgeInsets.symmetric(
+                      vertical: dimensionConstant.spacing12),
                   padding: EdgeInsets.symmetric(
                     vertical: dimensionConstant.spacing12,
                     horizontal: dimensionConstant.spacing12,
@@ -28,7 +28,8 @@ class ListWeightData extends StatelessWidget {
                   child: state is DashboardLoading
                       ? Center(child: CircularProgressIndicator())
                       : ListView.builder(
-                          itemCount: ctx.read<DashboardCubit>().listWeight.length,
+                          itemCount:
+                              ctx.read<DashboardCubit>().listWeight.length,
                           addAutomaticKeepAlives: false,
                           addRepaintBoundaries: false,
                           shrinkWrap: true,
@@ -38,49 +39,65 @@ class ListWeightData extends StatelessWidget {
                                 ),
                                 child: ItemOutlineCardDashboard(
                                   enableFullWidth: true,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                  child: Column(
                                     children: [
-                                      Text(
-                                          '${ctx.read<DashboardCubit>().listWeight[idx].currentWeight} ${stringConstant.kilo}'),
-                                      Text(
-                                          '${ctx.read<DashboardCubit>().listWeight[idx].save_date}'),
                                       Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          TextButton(
-                                            onPressed: () => ctx
-                                                .read<DashboardCubit>()
-                                                .editDataWeight(
-                                                    id: ctx
-                                                        .read<DashboardCubit>()
-                                                        .listWeight[idx]
-                                                        .id),
-                                            child: Text(
-                                              stringConstant.edit,
-                                              style: styleConstant.Text14Body1(
-                                                  customColor:
-                                                      colorConstant.primaryBlue,
-                                                  isSemiBold: true),
-                                            ),
+                                          Text(
+                                            '${ctx.read<DashboardCubit>().listWeight[idx].currentWeight} ${stringConstant.kilo}',
+                                            style:
+                                                styleConstant.Text14Body1(),
                                           ),
-                                          TextButton(
-                                              onPressed: () => ctx
-                                                  .read<DashboardCubit>()
-                                                  .deleteDataWeight(
-                                                      id: ctx
-                                                          .read<DashboardCubit>()
-                                                          .listWeight[idx]
-                                                          .id),
-                                              child: Text(
-                                                stringConstant.delete,
-                                                style: styleConstant.Text14Body1(
-                                                    customColor: colorConstant
-                                                        .secondaryRedRose,
-                                                    isSemiBold: true),
-                                              )),
+                                          Text(
+                                            '${DateFormat('dd MMM yyyy HH:mm').format(DateTime.parse('${ctx.read<DashboardCubit>().listWeight[idx].save_date}'))}',
+                                            style:
+                                                styleConstant.Text12SmallText(),
+                                          ),
+                                          Row(
+                                            children: [
+                                              TextButton(
+                                                onPressed: () => ctx
+                                                    .read<DashboardCubit>()
+                                                    .editDataWeight(
+                                                        id: ctx
+                                                            .read<
+                                                                DashboardCubit>()
+                                                            .listWeight[idx]
+                                                            .id),
+                                                child: Text(
+                                                  stringConstant.edit,
+                                                  style:
+                                                      styleConstant.Text14Body1(
+                                                          customColor:
+                                                              colorConstant
+                                                                  .primaryBlue,
+                                                          isSemiBold: true),
+                                                ),
+                                              ),
+                                              TextButton(
+                                                  onPressed: () => ctx
+                                                      .read<DashboardCubit>()
+                                                      .deleteDataWeight(
+                                                          id: ctx
+                                                              .read<
+                                                                  DashboardCubit>()
+                                                              .listWeight[idx]
+                                                              .id),
+                                                  child: Text(
+                                                    stringConstant.delete,
+                                                    style: styleConstant
+                                                        .Text14Body1(
+                                                            customColor:
+                                                                colorConstant
+                                                                    .secondaryRedRose,
+                                                            isSemiBold: true),
+                                                  )),
+                                            ],
+                                          )
                                         ],
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
