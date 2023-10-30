@@ -41,7 +41,7 @@ class ListWeightData extends StatelessWidget {
                         Row(
                           children: [
                             TextButton(
-                              onPressed: () => context.read<DashboardCubit>().editDataWeight(),
+                              onPressed: () => context.read<DashboardCubit>().editDataWeight(id: 'isi id nya'),
                               child: Text(
                                 stringConstant.edit,
                                 style: styleConstant.Text14Body1(
@@ -50,7 +50,7 @@ class ListWeightData extends StatelessWidget {
                               ),
                             ),
                             TextButton(
-                                onPressed: () => context.read<DashboardCubit>().deleteDataWeight(),
+                                onPressed: () => context.read<DashboardCubit>().deleteDataWeight(id: 'isi id nya'),
                                 child: Text(
                                   stringConstant.delete,
                                   style: styleConstant.Text14Body1(

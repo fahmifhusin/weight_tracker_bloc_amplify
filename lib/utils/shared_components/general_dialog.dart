@@ -72,10 +72,10 @@ class GeneralDialog {
       {required String title,
       required String btnTitle,
       required Function function,
+      required TextEditingController textEditingController,
       bool isDismissible = true,
       bool isLoading = false,
       bool isActive = true}) {
-    TextEditingController textEditingController = TextEditingController();
     showDialog(
       barrierColor: colorConstant.neutralShadowDarker.withOpacity(0.5),
       barrierDismissible: isDismissible,

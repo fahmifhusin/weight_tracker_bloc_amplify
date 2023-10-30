@@ -3,6 +3,8 @@ part of dashboard_lib;
 class DashboardCubit extends Cubit<DashboardState> {
   DashboardCubit() : super(const DashboardInitial());
 
+  TextEditingController tecWeight = TextEditingController();
+
   var _listWeight = <WeigtTrackerUserModel>[];
 
   List _dummyListWeight = [
@@ -54,43 +56,82 @@ class DashboardCubit extends Cubit<DashboardState> {
       _userName = _getGenerateAttribute(argument: argument.name);
       _weightGoals = _getGenerateAttribute(argument: argument.weightGoals);
       _currentWeight = _getGenerateAttribute(argument: argument.currentWeight);
-      emit(DashboardUserLoaded());
+      logger.d('data weight : $_listWeight');
+      getDataWeight().then((_) async => emit(DashboardUserLoaded()));
     });
   }
 
   Future<void> getDataWeight() async {
     try {
       _listWeight =
-      await Amplify.DataStore.query(WeigtTrackerUserModel.classType);
+          await Amplify.DataStore.query(WeigtTrackerUserModel.classType);
     } catch (_) {}
   }
 
   void addDataWeight() {
     generalDialog.showDialogWeightManagement(
+      textEditingController: tecWeight,
       title: stringConstant.addWeightMsg,
       btnTitle: stringConstant.add,
-      function: (){
-        WeigtTrackerUserModel newWeight = WeigtTrackerUserModel();
+      function: () async {
+        final String userId = _getGenerateAttribute(argument: argument.userId);
+        WeigtTrackerUserModel newWeight = WeigtTrackerUserModel(
+          user_id: userId,
+          save_date: TemporalDate(DateTime.now()),
+          currentWeight: double.parse(tecWeight.text),
+        );
+        try {
+          await Amplify.DataStore.save(newWeight);
+        } catch (e) {
+          logger.d('error : $e');
+        }
       },
     );
   }
 
-  void editDataWeight() {
+  void editDataWeight({required String id}) {
     generalDialog.showDialogWeightManagement(
+      textEditingController: tecWeight,
       title: stringConstant.editWeightMsg,
       btnTitle: stringConstant.edit,
-      function: () => logger.d('tap'),
+      function: () async {
+        final String userId = _getGenerateAttribute(argument: argument.userId);
+        WeigtTrackerUserModel oldData = (await Amplify.DataStore.query(
+            WeigtTrackerUserModel.classType,
+            where: WeigtTrackerUserModel.USER_ID
+                .eq(userId)
+                .and(WeigtTrackerUserModel.ID.eq(id))))[0];
+        WeigtTrackerUserModel newData = WeigtTrackerUserModel(
+          id: id,
+          user_id: userId,
+          save_date: TemporalDate(DateTime.now()),
+          currentWeight: double.parse(tecWeight.text),
+        );
+        try {
+          await Amplify.DataStore.save(newData);
+        } catch (e) {
+          logger.d('error : $e');
+        }
+      },
     );
   }
 
-  void deleteDataWeight() {
+  void deleteDataWeight({required String id}) {
     generalDialog.showDialogConfirmation(
         titleMsg: stringConstant.signOutConfirmationMsg,
         titleBtnLeft: stringConstant.delete,
         titleBtnRight: stringConstant.cancel,
-        btnLeftAction: () {
-          logger.d('tap');
-          generalKeys.ctxRoute.pop();
+        btnLeftAction: () async {
+          (await Amplify.DataStore.query(WeigtTrackerUserModel.classType,
+                  where: WeigtTrackerUserModel.ID.eq(id)))
+              .forEach((element) async {
+            try {
+              await Amplify.DataStore.delete(element)
+                  .then((_) => generalKeys.ctxRoute.pop());
+            } catch (e) {
+              logger.d('error : $e');
+            }
+          });
         },
         btnRightAction: () => generalKeys.ctxRoute.pop());
   }

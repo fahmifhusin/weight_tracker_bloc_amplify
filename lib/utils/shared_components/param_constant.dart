@@ -16,6 +16,7 @@ class ParamConstant {
   final String currentWeight = 'custom:currentweight';
   final String email = 'email';
   final String saveDate = 'saveDate';
+  final String userId = 'sub';
 
 
 }
