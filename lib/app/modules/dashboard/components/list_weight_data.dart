@@ -51,7 +51,7 @@ class ListWeightData extends StatelessWidget {
                                                 styleConstant.Text14Body1(),
                                           ),
                                           Text(
-                                            '${DateFormat('dd MMM yyyy HH:mm').format(DateTime.parse('${ctx.read<DashboardCubit>().listWeight[idx].save_date}'))}',
+                                            '${DateFormat('dd MMM yyyy').format(DateTime.parse('${ctx.read<DashboardCubit>().listWeight[idx].save_date}'))}',
                                             style:
                                                 styleConstant.Text12SmallText(),
                                           ),

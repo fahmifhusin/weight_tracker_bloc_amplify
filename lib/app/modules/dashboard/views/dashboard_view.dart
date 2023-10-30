@@ -1,9 +1,10 @@
 part of dashboard_lib;
 
 class DashboardView extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    context.read<DashboardCubit>().setDataDashboard();
+    context.read<DashboardCubit>().setDataDashboard(isInit:true);
     return styleConstant.GeneralAppPage(
       customAppBarColor: colorConstant.neutralShadowDarker,
       pageColor: colorConstant.naturalWhite,

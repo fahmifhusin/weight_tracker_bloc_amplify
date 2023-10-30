@@ -56,17 +56,25 @@ class DashboardCubit extends Cubit<DashboardState> {
     return value;
   }
 
-  Future<void> setDataDashboard() async {
+  Future<void> setDataDashboard({bool isInit = false}) async {
     clearFieldWeight();
     await _fetchCurrentUserAttributes().then((_) {
       _userName = _getGenerateAttribute(argument: argument.name);
       _weightGoals = _getGenerateAttribute(argument: argument.weightGoals);
       _currentWeight = _getGenerateAttribute(argument: argument.currentWeight);
       getDataWeight().then((_) {
-        emit(DashboardUserLoaded());
+        if (!isInit) {
+          emit(DashboardUserLoaded());
+        }
         logger.d('data weight : $_listWeight');
       });
     });
+    if (isInit) {
+      Future.delayed(const Duration(milliseconds: 3000), () {
+        ///handle instance late on init open page.
+        reloadWeightData();
+      });
+    }
   }
 
   Future<void> reloadWeightData() async {
@@ -232,11 +240,13 @@ class DashboardCubit extends Cubit<DashboardState> {
               value: tecName.text,
             ),
             AuthUserAttribute(
-              userAttributeKey: const CognitoUserAttributeKey.custom('currentWeight'),
+              userAttributeKey:
+                  const CognitoUserAttributeKey.custom('currentWeight'),
               value: tecCurrentWeight.text,
             ),
             AuthUserAttribute(
-              userAttributeKey: const CognitoUserAttributeKey.custom('weightGoals'),
+              userAttributeKey:
+                  const CognitoUserAttributeKey.custom('weightGoals'),
               value: tecWeightGoals.text,
             ),
           ]).then((_) {

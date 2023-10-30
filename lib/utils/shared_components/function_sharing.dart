@@ -13,12 +13,20 @@ class FunctionSharing {
     final authPlugin = AmplifyAuthCognito();
     final datastorePlugin = AmplifyDataStore(modelProvider: ModelProvider.instance);
     final apiPlugin = AmplifyAPI();
-    await Amplify.addPlugins([authPlugin,datastorePlugin,apiPlugin]);
+    await Amplify.addPlugins([apiPlugin,authPlugin,datastorePlugin]);
     try {
-      await Amplify.configure(amplifyconfig).then((_) => Amplify.Auth.signOut());
+      await Amplify.configure(amplifyconfig).then((_){
+        try{
+          Amplify.Auth.signOut();
+        }catch(_){
+          logger.d('error because not login yet');
+        }
+      });
     } on AmplifyAlreadyConfiguredException {
       logger.d(
           'Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
+    }catch(_){
+      logger.d('error to configure');
     }
   }
 
