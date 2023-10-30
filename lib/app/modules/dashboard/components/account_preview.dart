@@ -56,11 +56,14 @@ class AccountPreview extends StatelessWidget {
                   width: dimensionConstant.spacing16,
                 ),
                 Expanded(
-                  child: ItemOutlineCardDashboard(
-                    child: Text(
-                      '${stringConstant.yourGoals}\n${state is DashboardUserLoaded ? context.read<DashboardCubit>().weightGoals ?? '-' : '...'} ${stringConstant.kilo}',
-                      textAlign: TextAlign.center,
-                      style: styleConstant.Text14Body1(isSemiBold: true),
+                  child: GestureDetector(
+                    onTap: ()=>context.read<DashboardCubit>().editWeightGoals(),
+                    child: ItemOutlineCardDashboard(
+                      child: Text(
+                        '${stringConstant.yourGoals}\n${state is DashboardUserLoaded ? context.read<DashboardCubit>().weightGoals ?? '-' : '...'} ${stringConstant.kilo}',
+                        textAlign: TextAlign.center,
+                        style: styleConstant.Text14Body1(isSemiBold: true),
+                      ),
                     ),
                   ),
                 ),
@@ -79,7 +82,7 @@ class AccountPreview extends StatelessWidget {
                 Text(
                   context.read<DashboardCubit>().listWeight.isNotEmpty
                       ? '${context.read<DashboardCubit>().listWeight[0].currentWeight} ${stringConstant.kilo}'
-                      : state is DashboardUserLoaded ? context.read<DashboardCubit>().initialWeight ?? '-' : '...',
+                      : state is DashboardUserLoaded ? '${context.read<DashboardCubit>().initialWeight}.0 ${stringConstant.kilo}' ?? '-' : '...',
                   style: styleConstant.Text18Heading2(),
                 ),
               ],

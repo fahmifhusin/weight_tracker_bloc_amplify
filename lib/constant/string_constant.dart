@@ -52,6 +52,7 @@ class StringConstant {
   final String signOutConfirmationMsg = 'Are you sure?';
   final String addWeightData = 'Add Weight Data';
   final String addWeightMsg = 'Insert your current weight';
+  final String editWeightGoals = 'Insert your weight goals';
   final String editWeightMsg = 'Edit your weight data';
 
   ///other

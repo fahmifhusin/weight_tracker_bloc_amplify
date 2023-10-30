@@ -12,7 +12,7 @@ class DashboardCubit extends Cubit<DashboardState> {
   String? _currentWeight;
   String? _weightGoals;
 
-  void sortDataNewest(){
+  void sortDataNewest() {
     _listWeight.sort((a, b) => b.save_date!.compareTo(a.save_date!));
   }
 
@@ -23,6 +23,10 @@ class DashboardCubit extends Cubit<DashboardState> {
   String? get initialWeight => _currentWeight;
 
   String? get weightGoals => _weightGoals;
+
+  void clearFieldWeight(){
+    tecWeight.text = '';
+  }
 
   Future<void> _fetchCurrentUserAttributes() async {
     try {
@@ -47,12 +51,12 @@ class DashboardCubit extends Cubit<DashboardState> {
   }
 
   Future<void> setDataDashboard() async {
+    clearFieldWeight();
     await _fetchCurrentUserAttributes().then((_) {
       _userName = _getGenerateAttribute(argument: argument.name);
       _weightGoals = _getGenerateAttribute(argument: argument.weightGoals);
       _currentWeight = _getGenerateAttribute(argument: argument.currentWeight);
       getDataWeight().then((_) {
-        sortDataNewest();
         emit(DashboardUserLoaded());
         logger.d('data weight : $_listWeight');
       });
@@ -65,14 +69,39 @@ class DashboardCubit extends Cubit<DashboardState> {
   }
 
   Future<void> getDataWeight() async {
+    clearFieldWeight();
     try {
       final String userId = _getGenerateAttribute(argument: argument.userId);
-      _listWeight =
-          await Amplify.DataStore.query(WeigtTrackerUserModel.classType
-              ,where: WeigtTrackerUserModel.USER_ID
-              .eq(userId)
-          );
+      _listWeight = await Amplify.DataStore.query(
+          WeigtTrackerUserModel.classType,
+          where: WeigtTrackerUserModel.USER_ID.eq(userId));
+      sortDataNewest();
     } catch (_) {}
+  }
+
+  void editWeightGoals() {
+    generalDialog.showDialogWeightManagement(
+      textEditingController: tecWeight,
+      title: stringConstant.editWeightGoals,
+      btnTitle: stringConstant.add,
+      function: () async {
+        try {
+          generalKeys.ctxRoute.pop();
+          emit(DashboardLoading());
+          await Amplify.Auth.updateUserAttribute(
+            userAttributeKey:
+                const CognitoUserAttributeKey.custom('weightGoals'),
+            value: tecWeight.text,
+          ).then((_) {
+            setDataDashboard();
+          });
+        } on AuthException catch (e) {
+          safePrint('Error updating user attribute: ${e.message}');
+        } catch (e) {
+          logger.d('error : $e');
+        }
+      },
+    );
   }
 
   void addDataWeight() {
@@ -88,7 +117,7 @@ class DashboardCubit extends Cubit<DashboardState> {
           currentWeight: double.parse(tecWeight.text),
         );
         try {
-          await Amplify.DataStore.save(newWeight).then((_){
+          await Amplify.DataStore.save(newWeight).then((_) {
             generalKeys.ctxRoute.pop();
             reloadWeightData();
           });
@@ -139,8 +168,7 @@ class DashboardCubit extends Cubit<DashboardState> {
                   where: WeigtTrackerUserModel.ID.eq(id)))
               .forEach((element) async {
             try {
-              await Amplify.DataStore.delete(element)
-                  .then((_){
+              await Amplify.DataStore.delete(element).then((_) {
                 generalKeys.ctxRoute.pop();
                 reloadWeightData();
               });
