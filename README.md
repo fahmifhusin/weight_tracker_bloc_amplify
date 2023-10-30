@@ -30,6 +30,11 @@ $ flutter run --flavor production --target lib/main_production.dart
 
 _\*Weight Tracker works on Android and iOS._
 
+You can access the available account with the following data:
+username: ale1@mailinator.com, password: password
+username: ale2@mailinator.com, password: password
+username: fahmi13farhan@mailinator.com, password: password
+
 ---
 
 ## Running Tests 🧪
