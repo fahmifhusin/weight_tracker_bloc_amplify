@@ -42,6 +42,11 @@ class CustomField {
               obscureText: isHidePassword,
               keyboardType: inputType,
               textInputAction: inputAction,
+              inputFormatters: inputType == TextInputType.number
+                  ? [
+                      FilteringTextInputFormatter.allow(RegExp("[0-9\.]")),
+                    ]
+                  : [],
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderSide:
@@ -75,6 +80,7 @@ class CustomField {
     Function(String)? onChange,
     TextInputType inputType = TextInputType.text,
     TextInputAction inputAction = TextInputAction.next,
+    bool isNumber = false,
   }) {
     return _BaseCustomField(
       title: title,

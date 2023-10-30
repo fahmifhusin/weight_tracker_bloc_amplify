@@ -96,9 +96,17 @@ class DashboardCubit extends Cubit<DashboardState> {
             setDataDashboard();
           });
         } on AuthException catch (e) {
-          safePrint('Error updating user attribute: ${e.message}');
+          emit(DashboardError('error'));
+          generalDialog.showGeneralSnackbar(
+              message: e.message.split(":").last,
+              isError: true);
+          setDataDashboard();
         } catch (e) {
-          logger.d('error : $e');
+          emit(DashboardError('error'));
+          generalDialog.showGeneralSnackbar(
+              message: stringConstant.generalMsgError,
+              isError: true);
+          setDataDashboard();
         }
       },
     );
@@ -122,7 +130,10 @@ class DashboardCubit extends Cubit<DashboardState> {
             reloadWeightData();
           });
         } catch (e) {
-          logger.d('error : $e');
+          emit(DashboardError('error'));
+          generalDialog.showGeneralSnackbar(
+              message: stringConstant.generalMsgError,
+              isError: true);
         }
       },
     );
@@ -151,8 +162,11 @@ class DashboardCubit extends Cubit<DashboardState> {
             generalKeys.ctxRoute.pop();
             reloadWeightData();
           });
-        } catch (e) {
-          logger.d('error : $e');
+        } catch (_) {
+          emit(DashboardError('error'));
+          generalDialog.showGeneralSnackbar(
+              message: stringConstant.generalMsgError,
+              isError: true);
         }
       },
     );
@@ -174,6 +188,10 @@ class DashboardCubit extends Cubit<DashboardState> {
               });
             } catch (e) {
               logger.d('error : $e');
+              emit(DashboardError('error'));
+              generalDialog.showGeneralSnackbar(
+                  message: stringConstant.generalMsgError,
+                  isError: true);
             }
           });
         },
