@@ -54,6 +54,10 @@ class StringConstant {
   final String addWeightMsg = 'Insert your current weight';
   final String editWeightGoals = 'Insert your weight goals';
   final String editWeightMsg = 'Edit your weight data';
+  final String editProfile = 'Edit Your Profile';
+  final String updateData = 'Update Data';
+  final String deleteData = 'Delete Data';
+  final String createData = 'Create Data';
 
   ///other
   final String generalMsgError = 'An error occurred, please try again in a few moments.';

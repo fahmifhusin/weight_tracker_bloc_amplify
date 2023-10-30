@@ -4,6 +4,9 @@ class DashboardCubit extends Cubit<DashboardState> {
   DashboardCubit() : super(const DashboardInitial());
 
   TextEditingController tecWeight = TextEditingController();
+  TextEditingController tecName = TextEditingController();
+  TextEditingController tecCurrentWeight = TextEditingController();
+  TextEditingController tecWeightGoals = TextEditingController();
 
   var _listWeight = <WeigtTrackerUserModel>[];
 
@@ -24,8 +27,11 @@ class DashboardCubit extends Cubit<DashboardState> {
 
   String? get weightGoals => _weightGoals;
 
-  void clearFieldWeight(){
+  void clearFieldWeight() {
     tecWeight.text = '';
+    tecName.text = '';
+    tecCurrentWeight.text = '';
+    tecWeightGoals.text = '';
   }
 
   Future<void> _fetchCurrentUserAttributes() async {
@@ -83,7 +89,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     generalDialog.showDialogWeightManagement(
       textEditingController: tecWeight,
       title: stringConstant.editWeightGoals,
-      btnTitle: stringConstant.add,
+      btnTitle: stringConstant.updateData,
       function: () async {
         try {
           generalKeys.ctxRoute.pop();
@@ -98,14 +104,12 @@ class DashboardCubit extends Cubit<DashboardState> {
         } on AuthException catch (e) {
           emit(DashboardError('error'));
           generalDialog.showGeneralSnackbar(
-              message: e.message.split(":").last,
-              isError: true);
+              message: e.message.split(":").last, isError: true);
           setDataDashboard();
         } catch (e) {
           emit(DashboardError('error'));
           generalDialog.showGeneralSnackbar(
-              message: stringConstant.generalMsgError,
-              isError: true);
+              message: stringConstant.generalMsgError, isError: true);
           setDataDashboard();
         }
       },
@@ -116,7 +120,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     generalDialog.showDialogWeightManagement(
       textEditingController: tecWeight,
       title: stringConstant.addWeightMsg,
-      btnTitle: stringConstant.add,
+      btnTitle: stringConstant.createData,
       function: () async {
         final String userId = _getGenerateAttribute(argument: argument.userId);
         WeigtTrackerUserModel newWeight = WeigtTrackerUserModel(
@@ -132,8 +136,7 @@ class DashboardCubit extends Cubit<DashboardState> {
         } catch (e) {
           emit(DashboardError('error'));
           generalDialog.showGeneralSnackbar(
-              message: stringConstant.generalMsgError,
-              isError: true);
+              message: stringConstant.generalMsgError, isError: true);
         }
       },
     );
@@ -143,7 +146,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     generalDialog.showDialogWeightManagement(
       textEditingController: tecWeight,
       title: stringConstant.editWeightMsg,
-      btnTitle: stringConstant.edit,
+      btnTitle: stringConstant.updateData,
       function: () async {
         final String userId = _getGenerateAttribute(argument: argument.userId);
         // WeigtTrackerUserModel oldData = (await Amplify.DataStore.query(
@@ -165,8 +168,7 @@ class DashboardCubit extends Cubit<DashboardState> {
         } catch (_) {
           emit(DashboardError('error'));
           generalDialog.showGeneralSnackbar(
-              message: stringConstant.generalMsgError,
-              isError: true);
+              message: stringConstant.generalMsgError, isError: true);
         }
       },
     );
@@ -190,8 +192,7 @@ class DashboardCubit extends Cubit<DashboardState> {
               logger.d('error : $e');
               emit(DashboardError('error'));
               generalDialog.showGeneralSnackbar(
-                  message: stringConstant.generalMsgError,
-                  isError: true);
+                  message: stringConstant.generalMsgError, isError: true);
             }
           });
         },
@@ -210,6 +211,51 @@ class DashboardCubit extends Cubit<DashboardState> {
               gotoSignInFromDashboard();
             }),
         btnRightAction: () => generalKeys.ctxRoute.pop());
+  }
+
+  void editProfileDashboard() {
+    generalDialog.showDialogEditProfile(
+      title: stringConstant.editProfile,
+      btnTitle: stringConstant.updateData,
+      fieldTitle: [
+        stringConstant.name,
+        stringConstant.currentWeight,
+        stringConstant.weightGoals
+      ],
+      function: () async {
+        try {
+          generalKeys.ctxRoute.pop();
+          emit(DashboardLoading());
+          await Amplify.Auth.updateUserAttributes(attributes: [
+            AuthUserAttribute(
+              userAttributeKey: AuthUserAttributeKey.name,
+              value: tecName.text,
+            ),
+            AuthUserAttribute(
+              userAttributeKey: const CognitoUserAttributeKey.custom('currentWeight'),
+              value: tecCurrentWeight.text,
+            ),
+            AuthUserAttribute(
+              userAttributeKey: const CognitoUserAttributeKey.custom('weightGoals'),
+              value: tecWeightGoals.text,
+            ),
+          ]).then((_) {
+            setDataDashboard();
+          });
+        } on AuthException catch (e) {
+          emit(DashboardError('error'));
+          generalDialog.showGeneralSnackbar(
+              message: e.message.split(":").last, isError: true);
+          setDataDashboard();
+        } catch (e) {
+          emit(DashboardError('error'));
+          generalDialog.showGeneralSnackbar(
+              message: stringConstant.generalMsgError, isError: true);
+          setDataDashboard();
+        }
+      },
+      tec: [tecName, tecCurrentWeight, tecWeightGoals],
+    );
   }
 
   void gotoSignInFromDashboard() {

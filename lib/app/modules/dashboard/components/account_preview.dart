@@ -30,11 +30,27 @@ class AccountPreview extends StatelessWidget {
           SizedBox(
             height: dimensionConstant.spacing18,
           ),
-          Text(
-            '${stringConstant.hello}${state is DashboardUserLoaded ? context.read<DashboardCubit>().userName ?? '-' : '...'}',
-            style: styleConstant.Text22Heading1(customHeight: 1.5),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: functionSharing.screenWidth * 0.6,
+                child: Text(
+                  '${stringConstant.hello}${state is DashboardUserLoaded ? context.read<DashboardCubit>().userName ?? '-' : '...'}',
+                  style: styleConstant.Text22Heading1(customHeight: 1.5),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              TextButton(
+                onPressed: () =>
+                    context.read<DashboardCubit>().editProfileDashboard(),
+                child: Text(
+                  stringConstant.editProfile,
+                  style: styleConstant.Text12SmallText(),
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: EdgeInsets.symmetric(
