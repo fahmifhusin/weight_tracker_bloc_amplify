@@ -3,6 +3,8 @@ part of dashboard_lib;
 class DashboardCubit extends Cubit<DashboardState> {
   DashboardCubit() : super(const DashboardInitial());
 
+  var _listWeight = <WeigtTrackerUserModel>[];
+
   List _dummyListWeight = [
     {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
     {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
@@ -56,11 +58,20 @@ class DashboardCubit extends Cubit<DashboardState> {
     });
   }
 
+  Future<void> getDataWeight() async {
+    try {
+      _listWeight =
+      await Amplify.DataStore.query(WeigtTrackerUserModel.classType);
+    } catch (_) {}
+  }
+
   void addDataWeight() {
     generalDialog.showDialogWeightManagement(
       title: stringConstant.addWeightMsg,
       btnTitle: stringConstant.add,
-      function: () => logger.d('tap'),
+      function: (){
+        WeigtTrackerUserModel newWeight = WeigtTrackerUserModel();
+      },
     );
   }
 
@@ -77,7 +88,7 @@ class DashboardCubit extends Cubit<DashboardState> {
         titleMsg: stringConstant.signOutConfirmationMsg,
         titleBtnLeft: stringConstant.delete,
         titleBtnRight: stringConstant.cancel,
-        btnLeftAction: (){
+        btnLeftAction: () {
           logger.d('tap');
           generalKeys.ctxRoute.pop();
         },
@@ -89,8 +100,7 @@ class DashboardCubit extends Cubit<DashboardState> {
         titleMsg: stringConstant.signOutConfirmationMsg,
         titleBtnLeft: stringConstant.signOut,
         titleBtnRight: stringConstant.no,
-        btnLeftAction: () =>
-            Amplify.Auth.signOut().then((_){
+        btnLeftAction: () => Amplify.Auth.signOut().then((_) {
               generalKeys.ctxRoute.pop();
               gotoSignInFromDashboard();
             }),

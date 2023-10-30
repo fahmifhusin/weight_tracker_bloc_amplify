@@ -9,17 +9,20 @@ class FunctionSharing {
     return _functionSharing;
   }
 
-  Future<void> configureAmplify() async {
+  Future<void> configureAmplifyInstance() async {
+    final authPlugin = AmplifyAuthCognito();
+    final datastorePlugin = AmplifyDataStore(modelProvider: ModelProvider.instance);
+    final apiPlugin = AmplifyAPI();
+    await Amplify.addPlugins([authPlugin,datastorePlugin,apiPlugin]);
     try {
-      final auth = AmplifyAuthCognito();
-      await Amplify.addPlugin(auth);
-
-      // call Amplify.configure to use the initialized categories in your app
       await Amplify.configure(amplifyconfig).then((_) => Amplify.Auth.signOut());
-    } on Exception catch (e) {
-      logger.d('An error occurred configuring Amplify: $e');
+    } on AmplifyAlreadyConfiguredException {
+      logger.d(
+          'Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
     }
   }
+
+
 
   Future <AuthUser?> getUserData() async {
      AuthUser? userData;
