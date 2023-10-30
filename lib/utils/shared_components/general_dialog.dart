@@ -133,6 +133,13 @@ class GeneralDialog {
                 function: () => function(),
                 btnTitle: btnTitle,
               ),
+              generalButtons.PrimaryButton(
+                customBtnColor: colorConstant.secondaryRedRose,
+                isActive: isActive,
+                isLoading: isLoading,
+                function: () => generalKeys.ctxRoute.pop(),
+                btnTitle: stringConstant.cancel,
+              ),
               Container(
                 height: dimensionConstant.spacing20,
                 width: functionSharing.screenWidth,
@@ -182,11 +189,29 @@ class GeneralDialog {
                 teController: textEditingController,
                 inputType: TextInputType.number,
               ),
-              generalButtons.PrimaryButton(
-                isActive: isActive,
-                isLoading: isLoading,
-                function: () => function(),
-                btnTitle: btnTitle,
+              Row(
+                children: [
+                  Expanded(
+                    child: generalButtons.PrimaryButton(
+                      isActive: isActive,
+                      isLoading: isLoading,
+                      function: () => function(),
+                      btnTitle: btnTitle,
+                    ),
+                  ),
+                  SizedBox(
+                    width: dimensionConstant.spacing16,
+                  ),
+                  Expanded(
+                    child: generalButtons.PrimaryButton(
+                      customBtnColor: colorConstant.secondaryRedRose,
+                      isActive: isActive,
+                      isLoading: isLoading,
+                      function: () => generalKeys.ctxRoute.pop(),
+                      btnTitle: stringConstant.cancel,
+                    ),
+                  ),
+                ],
               ),
               Container(
                 height: dimensionConstant.spacing20,
