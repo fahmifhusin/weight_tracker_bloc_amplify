@@ -1,7 +1,7 @@
 type WeigtTrackerUserModel @model @auth(rules: [{allow: public}]) {
   id: ID!
   user_id: String
-  save_date: AWSDate
+  save_date: AWSDateTime
   currentWeight: Float
 }
  

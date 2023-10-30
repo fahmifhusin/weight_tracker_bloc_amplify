@@ -26,7 +26,7 @@ export 'WeigtTrackerUserModel.dart';
 
 class ModelProvider implements amplify_core.ModelProviderInterface {
   @override
-  String version = "ddd98a07851885d4dc88d93ec9bb7605";
+  String version = "6aca6699516455c00ff8255c9c674828";
   @override
   List<amplify_core.ModelSchema> modelSchemas = [WeigtTrackerUserModel.schema];
   @override

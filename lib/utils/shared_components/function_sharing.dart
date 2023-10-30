@@ -12,8 +12,7 @@ class FunctionSharing {
   Future<void> configureAmplifyInstance() async {
     final authPlugin = AmplifyAuthCognito();
     final datastorePlugin = AmplifyDataStore(modelProvider: ModelProvider.instance);
-    final apiPlugin = AmplifyAPI();
-    await Amplify.addPlugins([authPlugin,datastorePlugin,apiPlugin]);
+    await Amplify.addPlugins([authPlugin,datastorePlugin]);
     try {
       await Amplify.configure(amplifyconfig).then((_) => Amplify.Auth.signOut());
     } on AmplifyAlreadyConfiguredException {

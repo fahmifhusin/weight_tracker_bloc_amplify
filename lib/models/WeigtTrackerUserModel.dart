@@ -28,7 +28,7 @@ class WeigtTrackerUserModel extends amplify_core.Model {
   static const classType = const _WeigtTrackerUserModelModelType();
   final String id;
   final String? _user_id;
-  final amplify_core.TemporalDate? _save_date;
+  final amplify_core.TemporalDateTime? _save_date;
   final double? _currentWeight;
   final amplify_core.TemporalDateTime? _createdAt;
   final amplify_core.TemporalDateTime? _updatedAt;
@@ -50,7 +50,7 @@ class WeigtTrackerUserModel extends amplify_core.Model {
     return _user_id;
   }
   
-  amplify_core.TemporalDate? get save_date {
+  amplify_core.TemporalDateTime? get save_date {
     return _save_date;
   }
   
@@ -68,7 +68,7 @@ class WeigtTrackerUserModel extends amplify_core.Model {
   
   const WeigtTrackerUserModel._internal({required this.id, user_id, save_date, currentWeight, createdAt, updatedAt}): _user_id = user_id, _save_date = save_date, _currentWeight = currentWeight, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory WeigtTrackerUserModel({String? id, String? user_id, amplify_core.TemporalDate? save_date, double? currentWeight}) {
+  factory WeigtTrackerUserModel({String? id, String? user_id, amplify_core.TemporalDateTime? save_date, double? currentWeight}) {
     return WeigtTrackerUserModel._internal(
       id: id == null ? amplify_core.UUID.getUUID() : id,
       user_id: user_id,
@@ -109,7 +109,7 @@ class WeigtTrackerUserModel extends amplify_core.Model {
     return buffer.toString();
   }
   
-  WeigtTrackerUserModel copyWith({String? user_id, amplify_core.TemporalDate? save_date, double? currentWeight}) {
+  WeigtTrackerUserModel copyWith({String? user_id, amplify_core.TemporalDateTime? save_date, double? currentWeight}) {
     return WeigtTrackerUserModel._internal(
       id: id,
       user_id: user_id ?? this.user_id,
@@ -119,7 +119,7 @@ class WeigtTrackerUserModel extends amplify_core.Model {
   
   WeigtTrackerUserModel copyWithModelFieldValues({
     ModelFieldValue<String?>? user_id,
-    ModelFieldValue<amplify_core.TemporalDate?>? save_date,
+    ModelFieldValue<amplify_core.TemporalDateTime?>? save_date,
     ModelFieldValue<double?>? currentWeight
   }) {
     return WeigtTrackerUserModel._internal(
@@ -133,7 +133,7 @@ class WeigtTrackerUserModel extends amplify_core.Model {
   WeigtTrackerUserModel.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
       _user_id = json['user_id'],
-      _save_date = json['save_date'] != null ? amplify_core.TemporalDate.fromString(json['save_date']) : null,
+      _save_date = json['save_date'] != null ? amplify_core.TemporalDateTime.fromString(json['save_date']) : null,
       _currentWeight = (json['currentWeight'] as num?)?.toDouble(),
       _createdAt = json['createdAt'] != null ? amplify_core.TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
@@ -182,7 +182,7 @@ class WeigtTrackerUserModel extends amplify_core.Model {
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: WeigtTrackerUserModel.SAVE_DATE,
       isRequired: false,
-      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.date)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(

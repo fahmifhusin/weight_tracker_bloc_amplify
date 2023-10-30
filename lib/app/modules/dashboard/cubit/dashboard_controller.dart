@@ -7,21 +7,22 @@ class DashboardCubit extends Cubit<DashboardState> {
 
   var _listWeight = <WeigtTrackerUserModel>[];
 
-  List _dummyListWeight = [
-    {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
-    {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
-    {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
-    {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
-    {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
-    {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
-  ];
+  // List _dummyListWeight = [
+  //   {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
+  //   {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
+  //   {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
+  //   {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
+  //   {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
+  //   {argument.currentWeight: '50', argument.saveDate: '1 Oct 2020'},
+  // ];
 
   List attributeData = [];
   String? _userName;
   String? _currentWeight;
   String? _weightGoals;
 
-  List get listWeight => _dummyListWeight;
+  List<WeigtTrackerUserModel> get listWeight => _listWeight;
+      // .sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
   String? get userName => _userName;
 
@@ -56,15 +57,26 @@ class DashboardCubit extends Cubit<DashboardState> {
       _userName = _getGenerateAttribute(argument: argument.name);
       _weightGoals = _getGenerateAttribute(argument: argument.weightGoals);
       _currentWeight = _getGenerateAttribute(argument: argument.currentWeight);
-      logger.d('data weight : $_listWeight');
-      getDataWeight().then((_) async => emit(DashboardUserLoaded()));
+      getDataWeight().then((_) {
+        emit(DashboardUserLoaded());
+        logger.d('data weight : $_listWeight');
+      });
     });
+  }
+
+  Future<void> reloadWeightData() async {
+    emit(DashboardLoading());
+    getDataWeight().then((_) => emit(DashboardUserLoaded()));
   }
 
   Future<void> getDataWeight() async {
     try {
+      final String userId = _getGenerateAttribute(argument: argument.userId);
       _listWeight =
-          await Amplify.DataStore.query(WeigtTrackerUserModel.classType);
+          await Amplify.DataStore.query(WeigtTrackerUserModel.classType
+              ,where: WeigtTrackerUserModel.USER_ID
+              .eq(userId)
+          );
     } catch (_) {}
   }
 
@@ -77,11 +89,14 @@ class DashboardCubit extends Cubit<DashboardState> {
         final String userId = _getGenerateAttribute(argument: argument.userId);
         WeigtTrackerUserModel newWeight = WeigtTrackerUserModel(
           user_id: userId,
-          save_date: TemporalDate(DateTime.now()),
+          save_date: TemporalDateTime(DateTime.now()),
           currentWeight: double.parse(tecWeight.text),
         );
         try {
-          await Amplify.DataStore.save(newWeight);
+          await Amplify.DataStore.save(newWeight).then((_){
+            generalKeys.ctxRoute.pop();
+            reloadWeightData();
+          });
         } catch (e) {
           logger.d('error : $e');
         }
@@ -96,19 +111,22 @@ class DashboardCubit extends Cubit<DashboardState> {
       btnTitle: stringConstant.edit,
       function: () async {
         final String userId = _getGenerateAttribute(argument: argument.userId);
-        WeigtTrackerUserModel oldData = (await Amplify.DataStore.query(
-            WeigtTrackerUserModel.classType,
-            where: WeigtTrackerUserModel.USER_ID
-                .eq(userId)
-                .and(WeigtTrackerUserModel.ID.eq(id))))[0];
+        // WeigtTrackerUserModel oldData = (await Amplify.DataStore.query(
+        //     WeigtTrackerUserModel.classType,
+        //     where: WeigtTrackerUserModel.USER_ID
+        //         .eq(userId)
+        //         .and(WeigtTrackerUserModel.ID.eq(id))))[0];
         WeigtTrackerUserModel newData = WeigtTrackerUserModel(
           id: id,
           user_id: userId,
-          save_date: TemporalDate(DateTime.now()),
+          save_date: TemporalDateTime(DateTime.now()),
           currentWeight: double.parse(tecWeight.text),
         );
         try {
-          await Amplify.DataStore.save(newData);
+          await Amplify.DataStore.save(newData).then((_) {
+            generalKeys.ctxRoute.pop();
+            reloadWeightData();
+          });
         } catch (e) {
           logger.d('error : $e');
         }
@@ -127,7 +145,10 @@ class DashboardCubit extends Cubit<DashboardState> {
               .forEach((element) async {
             try {
               await Amplify.DataStore.delete(element)
-                  .then((_) => generalKeys.ctxRoute.pop());
+                  .then((_){
+                generalKeys.ctxRoute.pop();
+                reloadWeightData();
+              });
             } catch (e) {
               logger.d('error : $e');
             }
@@ -143,6 +164,7 @@ class DashboardCubit extends Cubit<DashboardState> {
         titleBtnRight: stringConstant.no,
         btnLeftAction: () => Amplify.Auth.signOut().then((_) {
               generalKeys.ctxRoute.pop();
+              emit(DashboardInitial());
               gotoSignInFromDashboard();
             }),
         btnRightAction: () => generalKeys.ctxRoute.pop());
