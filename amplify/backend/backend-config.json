@@ -1,34 +1,21 @@
 {
   "api": {
     "weighttracker": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "weighttracker68e739e1"
-        }
-      ],
+      "dependsOn": [],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [
             {
               "authenticationType": "AWS_IAM"
-            },
-            {
-              "apiKeyConfig": {
-                "apiKeyExpirationDays": 30,
-                "description": "api key description"
-              },
-              "authenticationType": "API_KEY"
             }
           ],
           "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authweighttracker68e739e1"
-            }
+            "apiKeyConfig": {
+              "apiKeyExpirationDate": "2023-11-06T08:31:08.727Z",
+              "apiKeyExpirationDays": 7,
+              "description": "tes"
+            },
+            "authenticationType": "API_KEY"
           }
         }
       },

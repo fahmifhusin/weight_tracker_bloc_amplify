@@ -4,23 +4,28 @@
     "apiName": "weighttracker",
     "serviceName": "AppSync",
     "defaultAuthType": {
-      "mode": "AMAZON_COGNITO_USER_POOLS",
-      "cognitoUserPoolId": "authweighttracker68e739e1"
+      "mode": "API_KEY",
+      "expirationTime": 7,
+      "apiKeyExpirationDate": "2023-11-06T08:31:08.727Z",
+      "keyDescription": "tes"
     },
     "additionalAuthTypes": [
       {
         "mode": "AWS_IAM"
-      },
-      {
-        "mode": "API_KEY",
-        "keyDescription": "api key description",
-        "expirationTime": 30
       }
     ],
     "conflictResolution": {
       "defaultResolutionStrategy": {
-        "type": "NONE"
-      }
+        "type": "AUTOMERGE"
+      },
+      "perModelResolutionStrategy": [
+        {
+          "resolutionStrategy": {
+            "type": "AUTOMERGE"
+          },
+          "entityName": "WeigtTrackerUserModel"
+        }
+      ]
     }
   }
 }
