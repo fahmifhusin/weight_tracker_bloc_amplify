@@ -52,7 +52,7 @@ class SignUpCubit extends Cubit<SignUpState> {
           username: tecEmail.text,
           password: tecPassword.text,
           options: SignUpOptions(userAttributes: {
-            AuthUserAttributeKey.phoneNumber: tecPhoneNumber.text,
+            AuthUserAttributeKey.phoneNumber: '+${tecPhoneNumber.text}',
             AuthUserAttributeKey.name: tecName.text,
             AuthUserAttributeKey.email: tecEmail.text,
             const CognitoUserAttributeKey.custom('currentWeight'):tecCurrentWeight.text,
